@@ -39,7 +39,7 @@ public class CategoriaRest {
 	
 	@GetMapping(value="/{id}")
 	public ResponseEntity<CategoriaDTO> find(@PathVariable Integer id){
-		Categoria categoria = service.find(id);
+		Categoria categoria = service.findById(id);
 		CategoriaDTO obj = new CategoriaDTO(categoria, categoria.getRestaurantes());
 		return ResponseEntity.ok().body(obj);
 	}

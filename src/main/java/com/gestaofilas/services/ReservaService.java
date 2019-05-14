@@ -9,51 +9,44 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort.Direction;
 import org.springframework.stereotype.Service;
 
-import com.gestaofilas.services.exceptions.DataIntegrityException;
 import com.gestaofilas.services.exceptions.ObjectNotFoundException;
-import com.gestaofilas.dao.CategoriaDAO;
-import com.gestaofilas.entity.Categoria;
+import com.gestaofilas.dao.ReservaDAO;
+import com.gestaofilas.entity.Reserva;
 
 
 @Service
-public class CategoriaService {
+public class ReservaService {
 
 	@Autowired
-	CategoriaDAO repo;
+	ReservaDAO repo;
 	
-	public Categoria findById(Integer id) {
-		Optional<Categoria> obj = repo.findById(id);
+	public Reserva findById(Integer id) {
+		Optional<Reserva> obj = repo.findById(id);
 		return obj.orElseThrow(() -> new ObjectNotFoundException(
-				"Objeto não encontrado! Id: " + id + ", Tipo: " + Categoria.class.getName()));
+				"Objeto não encontrado! Id: " + id + ", Tipo: " + Reserva.class.getName()));
 	}
 	
-	public List<Categoria> findAll() {
+	public List<Reserva> findAll() {
 		return repo.findAll();
 	}
 	
-	public Page<Categoria> findPage(Integer page, Integer linesPerPage, String orderBy, String direction) {
+	public Page<Reserva> findPage(Integer page, Integer linesPerPage, String orderBy, String direction) {
 		PageRequest pageRequest = PageRequest.of(page, linesPerPage, Direction.valueOf(direction), orderBy);
 		return repo.findAll(pageRequest);
 	}
 	
-	public Categoria save (Categoria obj) {
+	public Reserva save (Reserva obj) {
 		obj.setId(null);
 		return repo.save(obj);
 	}
 	
-	public Categoria update(Categoria obj) {
+	public Reserva update(Reserva obj) {
 		findById(obj.getId());
 		return repo.save(obj);
 	}
 	
 	public void delete(Integer id) {
-		Categoria obj = findById(id);
-
-		if(obj.getRestaurantes().isEmpty()) {
-			repo.deleteById(id);
-		}else {
-			throw new DataIntegrityException("Está Categoria não pode ser deletada");
-		}
-		
+		Reserva obj = findById(id);
+		repo.deleteById(obj.getId());
 	}
 }

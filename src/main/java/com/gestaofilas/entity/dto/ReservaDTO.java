@@ -1,43 +1,39 @@
-package com.gestaofilas.entity;
+package com.gestaofilas.entity.dto;
 
 import java.io.Serializable;
 import java.util.Date;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
+import com.gestaofilas.entity.Cliente;
+import com.gestaofilas.entity.Reserva;
+import com.gestaofilas.entity.Restaurante;
 
-import com.gestaofilas.entity.enums.EstadoReserva;
-
-@Entity
-public class Reserva implements Serializable {
+public class ReservaDTO implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
-	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Integer id;
 	private Date horaReserva;
 	private Integer estadoReserva;
-	
-	@ManyToOne
-	@JoinColumn(name="idRestaurante")
 	private Restaurante restaurante;
-	
-	@ManyToOne
-	@JoinColumn(name="idCliente")
 	private Cliente cliente;
 	
-	public Reserva(){
+	public ReservaDTO() {
 	}
-
-	public Reserva(Integer id, Date horaReserva, EstadoReserva estadoReserva) {
+	
+	public ReservaDTO(Integer id, Date horaReserva, Integer estadoReserva, Restaurante restaurante, Cliente cliente) {
 		super();
 		this.id = id;
 		this.horaReserva = horaReserva;
-		this.estadoReserva = estadoReserva.getCod();
+		this.estadoReserva = estadoReserva;
+		this.restaurante = restaurante;
+		this.cliente = cliente;
+	}
+	
+	public ReservaDTO(Reserva obj) {
+		this.id = obj.getId();
+		this.horaReserva = obj.getHoraReserva();
+		this.estadoReserva = obj.getEstadoReserva().getCod();
+		this.restaurante = obj.getRestaurante();
+		this.cliente = obj.getCliente();
 	}
 
 	public Integer getId() {
@@ -56,12 +52,12 @@ public class Reserva implements Serializable {
 		this.horaReserva = horaReserva;
 	}
 
-	public EstadoReserva getEstadoReserva() {
-		return EstadoReserva.toEnum(estadoReserva);
+	public Integer getEstadoReserva() {
+		return estadoReserva;
 	}
 
-	public void setEstadoReserva(EstadoReserva estadoReserva) {
-		this.estadoReserva = estadoReserva.getCod();
+	public void setEstadoReserva(Integer estadoReserva) {
+		this.estadoReserva = estadoReserva;
 	}
 
 	public Restaurante getRestaurante() {
@@ -79,5 +75,5 @@ public class Reserva implements Serializable {
 	public void setCliente(Cliente cliente) {
 		this.cliente = cliente;
 	}
-	
+
 }

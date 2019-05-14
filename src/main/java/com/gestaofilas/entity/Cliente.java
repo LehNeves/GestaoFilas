@@ -14,7 +14,6 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.gestaofilas.entity.dto.ClienteNewDTO;
 
 @Entity
@@ -40,7 +39,7 @@ public class Cliente implements Serializable {
 	private List<TelefoneCliente> telefones = new ArrayList<>();
 	
 	@OneToMany(mappedBy="cliente")
-	@JsonManagedReference
+	@JsonIgnore
 	private List<Reserva> reservas = new ArrayList<>();
 	
 	public Cliente() {
