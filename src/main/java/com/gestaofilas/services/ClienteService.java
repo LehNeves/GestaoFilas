@@ -10,7 +10,6 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort.Direction;
 import org.springframework.stereotype.Service;
 
-import com.gestaofilas.dao.CategoriaDAO;
 import com.gestaofilas.dao.ClienteDAO;
 import com.gestaofilas.dao.EnderecoClienteDAO;
 import com.gestaofilas.dao.TelClienteDAO;
@@ -27,9 +26,6 @@ public class ClienteService {
 
 	@Autowired
 	ClienteDAO clienteRepo;
-	
-	@Autowired
-	CategoriaDAO reservaRepo;
 	
 	@Autowired
 	TelClienteDAO telefoneRepo;
@@ -87,7 +83,7 @@ public class ClienteService {
 	}
 	
 	public Cliente updateData(Cliente obj, Cliente persist) {
-		persist.setNomeCliente(obj.getNomeCliente());
+		persist.setNome(obj.getNome());
 		persist.setEmail(obj.getEmail());
 		persist.setEndereco(obj.getEndereco());
 		persist.setTelefones(persist.getTelefones());

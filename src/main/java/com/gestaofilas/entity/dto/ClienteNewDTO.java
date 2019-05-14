@@ -1,12 +1,11 @@
 package com.gestaofilas.entity.dto;
 
 import java.io.Serializable;
-import java.util.List;
 
 public class ClienteNewDTO implements Serializable{
 	private static final long serialVersionUID = 1L;
 	
-	private String nomeCliente;
+	private String nome;
 	private String email;
 	private String cpf;
 	private String senha;
@@ -26,12 +25,13 @@ public class ClienteNewDTO implements Serializable{
 	private Integer ddd2;
 	private String telefone2;
 	
-	
+	public ClienteNewDTO() {
+	}
+
 	public ClienteNewDTO(String nome, String email, String cpf, String senha,
 			Integer tipoLogradouro, String logradouro, String numero, String complemento, String bairro, String cep,
 			Integer cidade, Integer ddd, String telefone, Integer ddd2, String telefone2) {
-		super();
-		this.nomeCliente = nome;
+		this.nome = nome;
 		this.email = email;
 		this.cpf = cpf;
 		this.senha = senha;
@@ -49,11 +49,11 @@ public class ClienteNewDTO implements Serializable{
 	}
 
 	public String getNome() {
-		return nomeCliente;
+		return nome;
 	}
 
 	public void setNome(String nome) {
-		this.nomeCliente = nome;
+		this.nome = nome;
 	}
 
 	public String getEmail() {

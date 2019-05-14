@@ -56,7 +56,7 @@ public class CategoriaRest {
 	}
 	
 	@PostMapping 
-	ResponseEntity<Categoria> insert (@RequestBody Categoria obj){
+	ResponseEntity<Void> insert (@RequestBody Categoria obj){
 		obj = service.save(obj);
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(obj.getId()).toUri();
 		return ResponseEntity.created(uri).build();

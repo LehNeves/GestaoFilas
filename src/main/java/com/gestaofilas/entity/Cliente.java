@@ -10,14 +10,12 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.gestaofilas.entity.dto.ClienteNewDTO;
-import com.gestaofilas.entity.dto.RestauranteNewDTO;
 
 @Entity
 public class Cliente implements Serializable {
@@ -26,7 +24,7 @@ public class Cliente implements Serializable {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Integer id;
-	private String nomeCliente;
+	private String nome;
 	private String email;
 	
 	@JsonIgnore
@@ -50,17 +48,17 @@ public class Cliente implements Serializable {
 
 	public Cliente(Integer id, String nomeCliente, String email, String cpf, String senha) {
 		this.id = id;
-		this.nomeCliente = nomeCliente;
+		this.nome = nomeCliente;
 		this.email = email;
 		this.cpf = cpf;
 		this.senha = senha;
 	}
 	
 	public Cliente(ClienteNewDTO obj) {
-		this.nomeCliente = obj.getNome();
+		this.nome = obj.getNome();
 		this.email = obj.getEmail();
-		this.cpf = getCpf();
 		this.senha = obj.getSenha();
+		this.cpf = obj.getCpf();
 	}
 
 	public Integer getId() {
@@ -71,12 +69,12 @@ public class Cliente implements Serializable {
 		this.id = id;
 	}
 
-	public String getNomeCliente() {
-		return nomeCliente;
+	public String getNome() {
+		return nome;
 	}
 
-	public void setNomeCliente(String nomeCliente) {
-		this.nomeCliente = nomeCliente;
+	public void setNome(String nome) {
+		this.nome = nome;
 	}
 
 	public String getEmail() {
