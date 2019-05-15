@@ -23,12 +23,10 @@ public class Reserva implements Serializable {
 	private Date horaReserva;
 	private Integer estadoReserva;
 	
-	@JsonIgnore
 	@ManyToOne
 	@JoinColumn(name="idRestaurante")
 	private Restaurante restaurante;
 	
-	@JsonIgnore
 	@ManyToOne
 	@JoinColumn(name="idCliente")
 	private Cliente cliente;
