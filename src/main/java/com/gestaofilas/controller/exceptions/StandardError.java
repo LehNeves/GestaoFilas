@@ -1,12 +1,15 @@
 package com.gestaofilas.controller.exceptions;
 
-public class StandardError {
+import java.io.Serializable;
 
+public class StandardError implements Serializable {
+	private static final long serialVersionUID = 1L;
+	
 	private Long timestamp;
 	private Integer status;
 	private String message;
 	
-	public StandardError(Long timestamp, Integer status, String error, String message, String path) {
+	public StandardError(Long timestamp, Integer status, String message, String path) {
 		super();
 		this.timestamp = timestamp;
 		this.status = status;

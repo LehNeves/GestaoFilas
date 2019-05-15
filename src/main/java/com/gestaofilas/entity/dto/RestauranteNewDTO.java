@@ -3,25 +3,52 @@ package com.gestaofilas.entity.dto;
 import java.io.Serializable;
 import java.util.List;
 
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotEmpty;
+
 public class RestauranteNewDTO implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
+	@NotEmpty(message="Preenchimento obrigatório")
 	private String razaoSocial;
+	
+	@NotEmpty(message="Preenchimento obrigatório")
 	private String nome;
+	
+	@NotEmpty(message="Preenchimento obrigatório")
 	private String cnpj;
+	
+	@NotEmpty(message="Preenchimento obrigatório")
+	@Email(message="Email inválido")
 	private String email;
+	
+	@NotEmpty(message="Preenchimento obrigatório")
 	private String senha;
 	
+	@NotEmpty(message="Preenchimento obrigatório")
 	private Integer tipoLogradouro;
+	
+	@NotEmpty(message="Preenchimento obrigatório")
 	private String logradouro;
+	
+	@NotEmpty(message="Preenchimento obrigatório")
 	private String numero;
+	
 	private String complemento;
+	
+	@NotEmpty(message="Preenchimento obrigatório")
 	private String bairro;
+	
+	@NotEmpty(message="Preenchimento obrigatório")
 	private String cep;
 	
+	@NotEmpty(message="Preenchimento obrigatório")
 	private Integer cidade;
 	
+	@NotEmpty(message="Preenchimento obrigatório")
 	private Integer ddd;
+	
+	@NotEmpty(message="Preenchimento obrigatório")
 	private String telefone;
 	
 	private Integer ddd2;

@@ -1,5 +1,7 @@
 package com.gestaofilas.entity;
 
+import java.io.Serializable;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -8,7 +10,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
 @Entity
-public class TelefoneCliente {
+public class TelefoneCliente implements Serializable{
 	private static final long serialVersionUID = 1L;
 
 	@Id

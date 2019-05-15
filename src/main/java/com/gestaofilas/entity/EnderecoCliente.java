@@ -10,7 +10,6 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
 import com.gestaofilas.entity.dto.ClienteNewDTO;
-import com.gestaofilas.entity.dto.RestauranteNewDTO;
 import com.gestaofilas.entity.enums.TipoLogradouro;
 
 @Entity

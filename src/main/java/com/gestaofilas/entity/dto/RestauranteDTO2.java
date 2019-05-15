@@ -4,7 +4,6 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.gestaofilas.entity.Categoria;
 import com.gestaofilas.entity.EnderecoRestaurante;
 import com.gestaofilas.entity.Restaurante;
 import com.gestaofilas.entity.TelefoneRestaurante;
