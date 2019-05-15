@@ -47,7 +47,6 @@ public class Restaurante implements Serializable {
 	@OneToMany(mappedBy="restaurante", cascade=CascadeType.ALL)
 	private List<TelefoneRestaurante> telefonesRestaurante= new ArrayList<>();
 	
-	@JsonIgnore
 	@OneToMany(mappedBy="restaurante")
 	private List<Reserva> reservas = new ArrayList<Reserva>();
 	

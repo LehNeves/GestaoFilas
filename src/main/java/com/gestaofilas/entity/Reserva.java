@@ -10,6 +10,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.gestaofilas.entity.enums.EstadoReserva;
 
 @Entity
@@ -22,10 +23,12 @@ public class Reserva implements Serializable {
 	private Date horaReserva;
 	private Integer estadoReserva;
 	
+	@JsonIgnore
 	@ManyToOne
 	@JoinColumn(name="idRestaurante")
 	private Restaurante restaurante;
 	
+	@JsonIgnore
 	@ManyToOne
 	@JoinColumn(name="idCliente")
 	private Cliente cliente;

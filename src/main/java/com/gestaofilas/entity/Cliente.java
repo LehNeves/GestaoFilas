@@ -38,7 +38,6 @@ public class Cliente implements Serializable {
 	@OneToMany(mappedBy="cliente", cascade=CascadeType.ALL)
 	private List<TelefoneCliente> telefones = new ArrayList<>();
 	
-	@JsonIgnore
 	@OneToMany(mappedBy="cliente")
 	private List<Reserva> reservas = new ArrayList<>();
 	
