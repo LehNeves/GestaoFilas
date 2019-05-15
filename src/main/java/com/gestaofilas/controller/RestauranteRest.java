@@ -33,25 +33,6 @@ public class RestauranteRest {
 	
 	@GetMapping
 	public ResponseEntity<Page<RestauranteDTO>> findPage(
-		@RequestParam(value="page", defaultValue="0") Integer page, 
-		@RequestParam(value="linesPerPage", defaultValue="24") Integer linesPerPage, 
-		@RequestParam(value="orderBy", defaultValue="nome") String orderBy, 
-		@RequestParam(value="direction", defaultValue="ASC") String direction
-	){
-		Page<Restaurante> list = service.findPage(page, linesPerPage, orderBy, direction);
-		Page<RestauranteDTO> listdto = list.map(obj -> new RestauranteDTO(obj));
-		return ResponseEntity.ok().body(listdto);
-	}
-	
-	@GetMapping(value="/{id}")
-	public ResponseEntity<RestauranteDTO2> findByID(@PathVariable Integer id){
-		Restaurante obj = service.findById(id);
-		RestauranteDTO2 dto = new RestauranteDTO2(obj, obj.getTelefonesRestaurante());
-		return ResponseEntity.ok().body(dto);
-	}
-	
-	@GetMapping(value="/page")
-	public ResponseEntity<Page<RestauranteDTO>> findPage(
 		@RequestParam(value="nome", defaultValue="") String nome, 
 		@RequestParam(value="categorias", defaultValue="") String categorias,
 		@RequestParam(value="page", defaultValue="0") Integer page, 
@@ -65,6 +46,13 @@ public class RestauranteRest {
 		Page<RestauranteDTO> listdto = list.map(obj -> new RestauranteDTO(obj));
 		
 		return ResponseEntity.ok().body(listdto);
+	}
+	
+	@GetMapping(value="/{id}")
+	public ResponseEntity<RestauranteDTO2> findByID(@PathVariable Integer id){
+		Restaurante obj = service.findById(id);
+		RestauranteDTO2 dto = new RestauranteDTO2(obj, obj.getTelefonesRestaurante());
+		return ResponseEntity.ok().body(dto);
 	}
 	
 	@PostMapping

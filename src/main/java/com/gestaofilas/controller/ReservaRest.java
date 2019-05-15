@@ -17,7 +17,7 @@ import com.gestaofilas.entity.dto.ReservaDTO;
 import com.gestaofilas.services.ReservaService;
 
 @RestController
-@RequestMapping(value = "/categorias")
+@RequestMapping(value = "/reservas")
 public class ReservaRest {
 
 	@Autowired

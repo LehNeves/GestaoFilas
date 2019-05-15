@@ -1,8 +1,8 @@
 package com.gestaofilas.controller;
 
 import java.net.URI;
-import java.util.List;
-import java.util.stream.Collectors;
+
+import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -30,13 +30,6 @@ public class CategoriaRest {
 	@Autowired
 	private CategoriaService service;
 	
-	@GetMapping
-	public ResponseEntity<List<CategoriaDTO2>> getCategorias() {
-		List<Categoria> list = service.findAll();
-		List<CategoriaDTO2> listDto = list.stream().map(obj -> new CategoriaDTO2(obj)).collect(Collectors.toList());
-		return ResponseEntity.ok().body(listDto);
-	}
-	
 	@GetMapping(value="/{id}")
 	public ResponseEntity<CategoriaDTO> find(@PathVariable Integer id){
 		Categoria categoria = service.findById(id);
@@ -44,7 +37,7 @@ public class CategoriaRest {
 		return ResponseEntity.ok().body(obj);
 	}
 	
-	@GetMapping(value="/page")
+	@GetMapping
 	public ResponseEntity<Page<CategoriaDTO2>> findPage(
 			@RequestParam(value="page", defaultValue="0") Integer page,
 			@RequestParam(value="linesPerPage", defaultValue="24") Integer linesPerPage,
@@ -55,8 +48,8 @@ public class CategoriaRest {
 		return ResponseEntity.ok().body(listDto);
 	}
 	
-	@PostMapping 
-	ResponseEntity<Void> insert (@RequestBody Categoria obj){
+	@PostMapping
+	ResponseEntity<Void> insert (@Valid @RequestBody Categoria obj){
 		obj = service.save(obj);
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(obj.getId()).toUri();
 		return ResponseEntity.created(uri).build();
