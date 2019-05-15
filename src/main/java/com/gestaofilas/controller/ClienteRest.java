@@ -2,6 +2,8 @@ package com.gestaofilas.controller;
 
 import java.net.URI;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
@@ -47,7 +49,7 @@ public class ClienteRest {
 	}
 	
 	@PostMapping
-	public ResponseEntity<ClienteDTO> insert (@RequestBody ClienteNewDTO obj){
+	public ResponseEntity<ClienteDTO> insert (@Valid @RequestBody ClienteNewDTO obj){
 		Cliente obj2 = service.insert(obj);
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(obj2.getId()).toUri();
 		return ResponseEntity.created(uri).build();

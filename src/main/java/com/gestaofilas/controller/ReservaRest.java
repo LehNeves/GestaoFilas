@@ -34,7 +34,7 @@ public class ReservaRest {
 	public ResponseEntity<Page<ReservaDTO>> findPage(
 			@RequestParam(value="page", defaultValue="0") Integer page,
 			@RequestParam(value="linesPerPage", defaultValue="24") Integer linesPerPage,
-			@RequestParam(value="orderBy", defaultValue="nome") String orderBy,
+			@RequestParam(value="orderBy", defaultValue="horaReserva") String orderBy,
 			@RequestParam(value="direction", defaultValue="ASC") String direction) {
 		Page<Reserva> list = service.findPage(page, linesPerPage, orderBy, direction);
 		Page<ReservaDTO> pageDto = list.map(obj -> new ReservaDTO(obj));
