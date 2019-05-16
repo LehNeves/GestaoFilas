@@ -1,6 +1,7 @@
 package com.gestaofilas.entity.dto;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.validation.constraints.Email;
@@ -8,6 +9,7 @@ import javax.validation.constraints.NotEmpty;
 
 import org.hibernate.validator.constraints.br.CNPJ;
 
+import com.gestaofilas.entity.TelefoneRestaurante;
 import com.gestaofilas.services.validation.RestauranteInsert;
 
 @RestauranteInsert
@@ -49,13 +51,7 @@ public class RestauranteNewDTO implements Serializable {
 	
 	private Integer cidade;
 	
-	private Integer ddd;
-	
-	@NotEmpty(message="Preenchimento obrigatório")
-	private String telefone;
-	
-	private Integer ddd2;
-	private String telefone2;
+	private List<TelefoneRestaurante> telefones = new ArrayList<TelefoneRestaurante>();
 	
 	private List<Integer> idsCategoria;
 	
@@ -64,7 +60,7 @@ public class RestauranteNewDTO implements Serializable {
 
 	public RestauranteNewDTO(String razaoSocial, String nome, String cnpj, String email, String senha,
 			Integer tipoLogradouro, String logradouro, String numero, String complemento, String bairro, String cep,
-			Integer cidade, Integer ddd, String telefone, Integer ddd2, String telefone2, List<Integer> idsCategoria) {
+			Integer cidade, List<TelefoneRestaurante> telefones, List<Integer> idsCategoria) {
 		super();
 		this.razaoSocial = razaoSocial;
 		this.nome = nome;
@@ -78,10 +74,7 @@ public class RestauranteNewDTO implements Serializable {
 		this.bairro = bairro;
 		this.cep = cep;
 		this.cidade = cidade;
-		this.ddd = ddd;
-		this.telefone = telefone;
-		this.ddd2 = ddd2;
-		this.telefone2 = telefone2;
+		this.setTelefones(telefones);
 		this.idsCategoria = idsCategoria;
 	}
 
@@ -173,38 +166,6 @@ public class RestauranteNewDTO implements Serializable {
 		this.cep = cep;
 	}
 
-	public Integer getDdd() {
-		return ddd;
-	}
-
-	public void setDdd(Integer ddd) {
-		this.ddd = ddd;
-	}
-
-	public String getTelefone() {
-		return telefone;
-	}
-
-	public void setTelefone(String telefone) {
-		this.telefone = telefone;
-	}
-
-	public Integer getDdd2() {
-		return ddd2;
-	}
-
-	public void setDdd2(Integer ddd2) {
-		this.ddd2 = ddd2;
-	}
-
-	public String getTelefone2() {
-		return telefone2;
-	}
-
-	public void setTelefone2(String telefone2) {
-		this.telefone2 = telefone2;
-	}
-
 	public List<Integer> getIdsCategoria() {
 		return idsCategoria;
 	}
@@ -219,5 +180,13 @@ public class RestauranteNewDTO implements Serializable {
 
 	public void setCidade(Integer cidade) {
 		this.cidade = cidade;
+	}
+
+	public List<TelefoneRestaurante> getTelefones() {
+		return telefones;
+	}
+
+	public void setTelefones(List<TelefoneRestaurante> telefones) {
+		this.telefones = telefones;
 	}
 }

@@ -78,20 +78,13 @@ public class RestauranteService {
 		Cidade cidade = new Cidade(obj.getCidade(), null, null);
 		enderecoRestaurante.setCidade(cidade);
 		restaurante.setEndereco(enderecoRestaurante);
-		
-		TelefoneRestaurante telefoneRestaurante = new TelefoneRestaurante(null, obj.getDdd(), obj.getTelefone());
-		telefoneRestaurante.setRestaurante(restaurante);
-		restaurante.setTelefonesRestaurante(Arrays.asList(telefoneRestaurante));
-		
-		if(obj.getDdd2() != null) {
-			TelefoneRestaurante telefoneRestaurante2 = new TelefoneRestaurante(null, obj.getDdd2(), obj.getTelefone2());
-			telefoneRestaurante2.setRestaurante(restaurante);
-			restaurante.setTelefonesRestaurante(Arrays.asList(telefoneRestaurante2));
-		}
-		
+		restaurante.setTelefonesRestaurante(obj.getTelefones());
 		enderecoRepo.save(enderecoRestaurante);
 		restaurante = restauranteRepo.save(restaurante);
-		telefoneRepo.save(telefoneRestaurante);
+		for(TelefoneRestaurante x : obj.getTelefones()) {
+			TelefoneRestaurante tel = new TelefoneRestaurante(null, x.getDdd(), x.getTelefone());
+			telefoneRepo.save(tel);
+		}
 		
 		return restaurante;
 	}

@@ -1,8 +1,6 @@
 package com.gestaofilas.entity.dto;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
 
 import com.gestaofilas.entity.Cliente;
 import com.gestaofilas.entity.EnderecoCliente;
