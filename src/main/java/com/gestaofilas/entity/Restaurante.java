@@ -87,11 +87,11 @@ public class Restaurante implements Serializable {
 		this.razaoSocial = razaoSocial;
 	}
 
-	public String getNomeFantasia() {
+	public String getNome() {
 		return nome;
 	}
 
-	public void setNomeFantasia(String nomeFantasia) {
+	public void setNome(String nomeFantasia) {
 		this.nome = nomeFantasia;
 	}
 
@@ -175,7 +175,5 @@ public class Restaurante implements Serializable {
 			return false;
 		return true;
 	}
-	
-	
 
 }

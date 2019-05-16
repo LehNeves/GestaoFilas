@@ -4,38 +4,49 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.gestaofilas.entity.Cliente;
+import javax.validation.constraints.NotEmpty;
+
 import com.gestaofilas.entity.EnderecoCliente;
 import com.gestaofilas.entity.TelefoneCliente;
 
-public class ClienteDTO2 implements Serializable {
+public class ClienteUpdateDTO implements Serializable{
 	private static final long serialVersionUID = 1L;
 	
+	private Integer id;
+	
+	@NotEmpty(message="Preenchimento Obrigatório")
 	private String nome;
+	
+	@NotEmpty(message="Preenchimento Obrigatório")
 	private String email;
-	private String cpf;
+	
+	@NotEmpty(message="Preenchimento Obrigatório")
+	private String senha;
+	
 	private EnderecoCliente endereco;
+	
 	private TelefoneCliente telefone;
 	
-	public ClienteDTO2 () {
-	}
-
-	public ClienteDTO2(String nome, String email, String cpf, EnderecoCliente endereco,
-			TelefoneCliente telefones) {
-		super();
-		this.nome = nome;
-		this.email = email;
-		this.cpf = cpf;
-		this.endereco = endereco;
-		this.telefone = telefones;
+	public ClienteUpdateDTO() {
 	}
 	
-	public ClienteDTO2(Cliente obj) {
-		this.nome = obj.getNome();
-		this.email = obj.getEmail();
-		this.cpf = obj.getCpf();
-		this.endereco = obj.getEndereco();
-		this.telefone = obj.getTelefone();
+	public ClienteUpdateDTO(Integer id, String nome, String email, String senha, EnderecoCliente endereco,
+			TelefoneCliente telefone) {
+		super();
+		this.id = id;
+		this.nome = nome;
+		this.email = email;
+		this.senha = senha;
+		this.endereco = endereco;
+		this.telefone = telefone;
+	}
+
+	public Integer getId() {
+		return id;
+	}
+
+	public void setId(Integer id) {
+		this.id = id;
 	}
 
 	public String getNome() {
@@ -54,12 +65,12 @@ public class ClienteDTO2 implements Serializable {
 		this.email = email;
 	}
 
-	public String getCpf() {
-		return cpf;
+	public String getSenha() {
+		return senha;
 	}
 
-	public void setCpf(String cpf) {
-		this.cpf = cpf;
+	public void setSenha(String senha) {
+		this.senha = senha;
 	}
 
 	public EnderecoCliente getEndereco() {
@@ -74,7 +85,7 @@ public class ClienteDTO2 implements Serializable {
 		return telefone;
 	}
 
-	public void setTelefone(TelefoneCliente telefones) {
-		this.telefone = telefones;
+	public void setTelefone(TelefoneCliente telefone) {
+		this.telefone = telefone;
 	}
 }

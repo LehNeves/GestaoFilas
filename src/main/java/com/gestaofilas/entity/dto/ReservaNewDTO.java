@@ -11,13 +11,10 @@ public class ReservaNewDTO implements Serializable{
 	@NotEmpty(message="Preenchimento obrigatório")
 	private Date horaReserva;
 	
-	@NotEmpty(message="Preenchimento obrigatório")
 	private Integer estadoReserva;
 	
-	@NotEmpty(message="Preenchimento obrigatório")
 	private Integer restaurante;
 	
-	@NotEmpty(message="Preenchimento obrigatório")
 	private Integer cliente;
 	
 	public ReservaNewDTO () {

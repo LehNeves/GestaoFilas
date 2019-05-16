@@ -14,8 +14,15 @@ import com.gestaofilas.entity.Restaurante;
 @Repository
 public interface RestauranteDAO extends JpaRepository<Restaurante, Integer>{
 
-@Transactional(readOnly=true)
+	@Transactional(readOnly=true)
 //	@Query("SELECT DISTINCT obj FROM Restaurante obj INNER JOIN obj.categorias cat WHERE obj.nomeFantasia LIKE %:nome% AND cat IN :categorias")
 //	Page<Restaurante> search(@Param("nome") String nome, @Param("categorias") List<Categoria> categorias, Pageable pageRequest);
 	Page<Restaurante> findDistinctByNomeContainingAndCategoriasIn(String nome, List<Categoria> categorias, Pageable pageRequest);
+	
+	@Transactional(readOnly=true)
+	Restaurante findByEmail(String email);
+	
+	@Transactional(readOnly=true)
+	Boolean findByCnpj(String cnpj);
+	
 }

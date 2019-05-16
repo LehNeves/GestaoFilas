@@ -8,14 +8,14 @@ public class RestauranteDTO implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
 	private Integer id;
-	private String nomeFantasia;
+	private String nome;
 	
 	public RestauranteDTO() {
 	}
 	
 	public RestauranteDTO(Restaurante obj) {
 		this.setId(obj.getId());
-		this.setNomeFantasia(obj.getNomeFantasia());
+		this.setNome(obj.getNome());
 	}
 
 	public Integer getId() {
@@ -26,12 +26,12 @@ public class RestauranteDTO implements Serializable {
 		this.id = id;
 	}
 
-	public String getNomeFantasia() {
-		return nomeFantasia;
+	public String getNome() {
+		return nome;
 	}
 
-	public void setNomeFantasia(String nomeFantasia) {
-		this.nomeFantasia = nomeFantasia;
+	public void setNome(String nomeFantasia) {
+		this.nome = nomeFantasia;
 	}
 
 }

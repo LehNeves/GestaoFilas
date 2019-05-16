@@ -18,6 +18,7 @@ import com.gestaofilas.entity.Cliente;
 import com.gestaofilas.entity.EnderecoCliente;
 import com.gestaofilas.entity.TelefoneCliente;
 import com.gestaofilas.entity.dto.ClienteNewDTO;
+import com.gestaofilas.entity.dto.ClienteUpdateDTO;
 import com.gestaofilas.services.exceptions.DataIntegrityException;
 import com.gestaofilas.services.exceptions.ObjectNotFoundException;
 
@@ -59,13 +60,7 @@ public class ClienteService {
 		
 		TelefoneCliente telefoneCliente = new TelefoneCliente(null, obj.getDdd(), obj.getTelefone());
 		telefoneCliente.setCliente(cliente);
-		cliente.setTelefones(Arrays.asList(telefoneCliente));
-		
-		if(obj.getDdd2() != null) {
-			TelefoneCliente telefoneCliente2 = new TelefoneCliente(null, obj.getDdd2(), obj.getTelefone2());
-			telefoneCliente2.setCliente(cliente);
-			cliente.setTelefones(Arrays.asList(telefoneCliente2));
-		}
+		cliente.setTelefone(telefoneCliente);
 		
 		enderecoRepo.save(enderecoCliente);
 		cliente = clienteRepo.save(cliente);
@@ -74,20 +69,19 @@ public class ClienteService {
 		return cliente;
 	}
 	
-	public Cliente update(Cliente obj) {
-		Cliente persist = findById(obj.getId());
-		obj = updateData(obj, persist);
-		
-		return clienteRepo.save(obj);
+	public void update(ClienteUpdateDTO objDto) {
+		Cliente obj = findById(objDto.getId());
+		obj = updateData(obj, objDto);
+		clienteRepo.save(obj);
 	}
 	
-	public Cliente updateData(Cliente obj, Cliente persist) {
-		persist.setNome(obj.getNome());
-		persist.setEmail(obj.getEmail());
-		persist.setEndereco(obj.getEndereco());
-		persist.setTelefones(persist.getTelefones());
+	public Cliente updateData(Cliente obj, ClienteUpdateDTO objDto) {
+		obj.setNome(objDto.getNome());
+		obj.setEmail(objDto.getEmail());
+		obj.setEndereco(objDto.getEndereco());
+		obj.setTelefone(objDto.getTelefone());
 		
-		return persist;
+		return obj;
 	}
 	
 	public void delete(Integer id) {

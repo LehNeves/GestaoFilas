@@ -3,6 +3,8 @@ package com.gestaofilas.controller;
 import java.net.URI;
 import java.util.List;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
@@ -22,6 +24,7 @@ import com.gestaofilas.entity.Restaurante;
 import com.gestaofilas.entity.dto.RestauranteDTO;
 import com.gestaofilas.entity.dto.RestauranteDTO2;
 import com.gestaofilas.entity.dto.RestauranteNewDTO;
+import com.gestaofilas.entity.dto.RestauranteUpdateDTO;
 import com.gestaofilas.services.RestauranteService;
 
 @RestController
@@ -56,16 +59,15 @@ public class RestauranteRest {
 	}
 	
 	@PostMapping
-	public ResponseEntity<Void> insert(@RequestBody RestauranteNewDTO obj){
+	public ResponseEntity<Void> insert(@Valid @RequestBody RestauranteNewDTO obj){
 		Restaurante obj2 = service.insert(obj);
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(obj2.getId()).toUri();
 		return ResponseEntity.created(uri).build();
 	}
 	
 	@PutMapping(value="/{id}")
-	public ResponseEntity<Void> update(@PathVariable Integer id, @RequestBody RestauranteDTO2 obj){
-		Restaurante restaurante = new Restaurante(obj.getId(), null, obj.getNomeFantasia(), null, obj.getEmail(), null);
-		restaurante = service.update(restaurante);
+	public ResponseEntity<Void> update(@Valid @PathVariable Integer id, @RequestBody RestauranteUpdateDTO objDto){
+		service.update(objDto);
 		return ResponseEntity.noContent().build();
 	}
 	

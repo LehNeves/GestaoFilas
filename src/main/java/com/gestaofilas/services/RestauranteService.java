@@ -23,6 +23,7 @@ import com.gestaofilas.entity.EnderecoRestaurante;
 import com.gestaofilas.entity.Restaurante;
 import com.gestaofilas.entity.TelefoneRestaurante;
 import com.gestaofilas.entity.dto.RestauranteNewDTO;
+import com.gestaofilas.entity.dto.RestauranteUpdateDTO;
 
 @Service
 public class RestauranteService {
@@ -95,21 +96,29 @@ public class RestauranteService {
 		return restaurante;
 	}
 	
-	public Restaurante update(Restaurante obj) {
-		Restaurante persist = findById(obj.getId());
-		obj = updateData(obj, persist);
-		
-		return restauranteRepo.save(obj);
-		
+	public void update(RestauranteUpdateDTO objDto) {
+		Restaurante obj = findById(objDto.getId());
+		obj = updateData(obj, objDto);
+		restauranteRepo.save(obj);
 	}
 	
-	public Restaurante updateData(Restaurante obj, Restaurante persist) {
-		persist.setNomeFantasia(obj.getNomeFantasia());
-		persist.setEmail(obj.getEmail());
-		persist.setEndereco(obj.getEndereco());
-		persist.setTelefonesRestaurante(persist.getTelefonesRestaurante());
+	public Restaurante updateData(Restaurante obj, RestauranteUpdateDTO objDto) {
+		obj.setNome(objDto.getNome());
+		obj.setEmail(objDto.getEmail());
+		obj.setRazaoSocial(objDto.getRazaoSocial());
+		obj.setSenha(objDto.getSenha());
+		obj.setEndereco(objDto.getEnderecoRestaurante());
+		obj.setTelefonesRestaurante(objDto.getTelefonesRestaurante());
 		
-		return persist;
+		List<Categoria> categorias = categoriaRepo.findAllById(objDto.getIdsCategorias());
+		obj.setCategorias(categorias);
+		
+		for(Categoria x : categorias) {
+			x.getRestaurantes().add(obj);
+			categoriaRepo.save(x);
+		}
+		
+		return obj;
 	}
 	
 	public void delete(Integer id) {

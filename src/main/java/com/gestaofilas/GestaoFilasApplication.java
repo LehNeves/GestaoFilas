@@ -104,23 +104,20 @@ public void run(String... args) throws Exception {
 		Cliente cliente = new Cliente(null, "Leandro", "leandro@gmail.com", "000000", "123");
 		
 		TelefoneCliente telCliente1 = new TelefoneCliente(null, 16, "00000");
-		TelefoneCliente telCliente2 = new TelefoneCliente(null, 15, "00000");
 		
 		telCliente1.setCliente(cliente);
-		telCliente2.setCliente(cliente);
 		
 		EnderecoCliente endCliente = new EnderecoCliente(null, TipoLogradouro.RUA, "Rua", "000", "bairroteste", "cepteste");
 		endCliente.setCidade(cidade);
 		
 		
 		cliente.setEndereco(endCliente);
-		cliente.getTelefones().addAll(Arrays.asList(telCliente1, telCliente2));
 		
 		endClienteSave.save(endCliente);
 		
 		clienteSave.save(cliente);
 		
-		telClienteSave.saveAll(Arrays.asList(telCliente1, telCliente2));
+		telClienteSave.save(telCliente1);
 		
 		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm");
 		

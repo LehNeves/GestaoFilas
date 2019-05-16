@@ -6,6 +6,11 @@ import java.util.List;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
 
+import org.hibernate.validator.constraints.br.CNPJ;
+
+import com.gestaofilas.services.validation.RestauranteInsert;
+
+@RestauranteInsert
 public class RestauranteNewDTO implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
@@ -16,6 +21,7 @@ public class RestauranteNewDTO implements Serializable {
 	private String nome;
 	
 	@NotEmpty(message="Preenchimento obrigatório")
+	@CNPJ
 	private String cnpj;
 	
 	@NotEmpty(message="Preenchimento obrigatório")
@@ -25,7 +31,6 @@ public class RestauranteNewDTO implements Serializable {
 	@NotEmpty(message="Preenchimento obrigatório")
 	private String senha;
 	
-	@NotEmpty(message="Preenchimento obrigatório")
 	private Integer tipoLogradouro;
 	
 	@NotEmpty(message="Preenchimento obrigatório")
@@ -42,10 +47,8 @@ public class RestauranteNewDTO implements Serializable {
 	@NotEmpty(message="Preenchimento obrigatório")
 	private String cep;
 	
-	@NotEmpty(message="Preenchimento obrigatório")
 	private Integer cidade;
 	
-	@NotEmpty(message="Preenchimento obrigatório")
 	private Integer ddd;
 	
 	@NotEmpty(message="Preenchimento obrigatório")

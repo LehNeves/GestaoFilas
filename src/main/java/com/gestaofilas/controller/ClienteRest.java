@@ -22,6 +22,7 @@ import com.gestaofilas.entity.Cliente;
 import com.gestaofilas.entity.dto.ClienteDTO;
 import com.gestaofilas.entity.dto.ClienteDTO2;
 import com.gestaofilas.entity.dto.ClienteNewDTO;
+import com.gestaofilas.entity.dto.ClienteUpdateDTO;
 import com.gestaofilas.services.ClienteService;
 
 @RestController
@@ -59,9 +60,9 @@ public class ClienteRest {
 	}
 	
 	@PutMapping(value="/{id}") 
-    public ResponseEntity<Void> update(@PathVariable Integer id, @RequestBody Cliente obj) { 
+    public ResponseEntity<Void> update(@Valid @PathVariable Integer id, @RequestBody ClienteUpdateDTO obj) { 
         obj.setId(id); 
-        obj = service.update(obj); 
+        service.update(obj); 
         return ResponseEntity.noContent().build(); 
     }
 

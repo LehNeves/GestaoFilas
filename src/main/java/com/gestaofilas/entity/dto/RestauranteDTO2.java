@@ -13,7 +13,7 @@ public class RestauranteDTO2 implements Serializable {
 	
 	private Integer id;
 	private String razaoSocial;
-	private String nomeFantasia;
+	private String nome;
 	private String cnpj;
 	private String email;
 	private EnderecoRestaurante enderecoRestaurante;
@@ -25,7 +25,7 @@ public class RestauranteDTO2 implements Serializable {
 	public RestauranteDTO2(Restaurante obj, List<TelefoneRestaurante> telefonesRestaurante) {
 		this.id = obj.getId();
 		this.razaoSocial = obj.getRazaoSocial();
-		this.nomeFantasia = obj.getNomeFantasia();
+		this.nome = obj.getNome();
 		this.cnpj = obj.getCnpj();
 		this.email = obj.getEmail();
 		this.enderecoRestaurante = obj.getEndereco();
@@ -41,11 +41,11 @@ public class RestauranteDTO2 implements Serializable {
 	}
 
 	public String getNomeFantasia() {
-		return nomeFantasia;
+		return nome;
 	}
 
 	public void setNomeFantasia(String nomeFantasia) {
-		this.nomeFantasia = nomeFantasia;
+		this.nome = nomeFantasia;
 	}
 
 	public String getRazaoSocial() {
