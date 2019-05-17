@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import com.gestaofilas.dao.*;
 import com.gestaofilas.entity.*;
@@ -14,6 +15,9 @@ import com.gestaofilas.entity.enums.*;
 //teste
 @SpringBootApplication
 public class GestaoFilasApplication implements CommandLineRunner {
+	
+	@Autowired
+	BCryptPasswordEncoder bCrypt;
 	
 	@Autowired
 	private CategoriaDAO catSave;
@@ -54,8 +58,8 @@ public void run(String... args) throws Exception {
 		Categoria cat1 = new Categoria(null, "Teste 1");
 		Categoria cat2 = new Categoria(null, "Teste 2");
 		
-		Restaurante rest1 = new Restaurante(null, "rest1", "rest1", "123", "rest1@email.com", "123");
-		Restaurante rest2 = new Restaurante(null, "rest2", "rest2", "123", "rest2@email.com", "123");
+		Restaurante rest1 = new Restaurante(null, "rest1", "rest1", "123", "rest1@email.com", bCrypt.encode("123"));
+		Restaurante rest2 = new Restaurante(null, "rest2", "rest2", "123", "rest2@email.com", bCrypt.encode("123"));
 		
 		EnderecoRestaurante endRestaurante = new EnderecoRestaurante(null, TipoLogradouro.RUA, "rua", "123", "", "bairro", "cep");
 		EnderecoRestaurante endRestaurante2 = new EnderecoRestaurante(null, TipoLogradouro.RUA, "rua2", "123", "", "bairro", "cep");
@@ -101,7 +105,7 @@ public void run(String... args) throws Exception {
 		restSave.saveAll(Arrays.asList(rest1, rest2));
 		telRestSave.saveAll(Arrays.asList(telRest1, telRest2, telRest3));
 		
-		Cliente cliente = new Cliente(null, "Leandro", "leandro@gmail.com", "000000", "123");
+		Cliente cliente = new Cliente(null, "Leandro", "leandro@gmail.com", "000000", bCrypt.encode("123"));
 		
 		TelefoneCliente telCliente1 = new TelefoneCliente(null, 16, "00000");
 		

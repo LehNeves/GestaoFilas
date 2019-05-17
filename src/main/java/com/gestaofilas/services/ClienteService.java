@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort.Direction;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.gestaofilas.dao.ClienteDAO;
@@ -23,6 +24,9 @@ import com.gestaofilas.services.exceptions.ObjectNotFoundException;
 
 @Service
 public class ClienteService {
+	
+	@Autowired
+	BCryptPasswordEncoder bCrypt;
 
 	@Autowired
 	ClienteDAO clienteRepo;
@@ -49,23 +53,24 @@ public class ClienteService {
 	}
 	
 	
-	public Cliente insert(ClienteNewDTO obj) {
-		Cliente cliente = new Cliente(obj);
+	public Cliente insert(ClienteNewDTO objDto) {
+		objDto.setSenha(bCrypt.encode(objDto.getSenha()));
+		Cliente obj = new Cliente(objDto);
 				
-		EnderecoCliente enderecoCliente = new EnderecoCliente(obj);
-		Cidade cidade = new Cidade(obj.getCidade(), null, null);
+		EnderecoCliente enderecoCliente = new EnderecoCliente(objDto);
+		Cidade cidade = new Cidade(objDto.getCidade(), null, null);
 		enderecoCliente.setCidade(cidade);
-		cliente.setEndereco(enderecoCliente);
+		obj.setEndereco(enderecoCliente);
 		
-		TelefoneCliente telefoneCliente = new TelefoneCliente(null, obj.getDdd(), obj.getTelefone());
-		telefoneCliente.setCliente(cliente);
-		cliente.setTelefone(telefoneCliente);
+		TelefoneCliente telefoneCliente = new TelefoneCliente(null, objDto.getDdd(), objDto.getTelefone());
+		telefoneCliente.setCliente(obj);
+		obj.setTelefone(telefoneCliente);
 		
 		enderecoRepo.save(enderecoCliente);
-		cliente = clienteRepo.save(cliente);
+		obj = clienteRepo.save(obj);
 		telefoneRepo.save(telefoneCliente);
 
-		return cliente;
+		return obj;
 	}
 	
 	public void update(ClienteUpdateDTO objDto) {

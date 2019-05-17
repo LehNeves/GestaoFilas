@@ -2,10 +2,16 @@ package com.gestaofilas.entity;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 import javax.persistence.CascadeType;
+import javax.persistence.CollectionTable;
+import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -15,6 +21,7 @@ import javax.persistence.OneToOne;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.gestaofilas.entity.dto.ClienteNewDTO;
+import com.gestaofilas.entity.enums.Perfil;
 
 @Entity
 public class Cliente implements Serializable {
@@ -38,11 +45,16 @@ public class Cliente implements Serializable {
 	@OneToOne(mappedBy="cliente", cascade=CascadeType.ALL)
 	private TelefoneCliente telefone;
 	
+	@ElementCollection(fetch=FetchType.EAGER)
+	@CollectionTable(name="PERFIS")
+	private Set<Integer> perfis = new HashSet<>();
+	
 	@JsonIgnore
 	@OneToMany(mappedBy="cliente")
 	private List<Reserva> reservas = new ArrayList<>();
 	
 	public Cliente() {
+		addPerfil(Perfil.CLIENTE);
 	}
 
 	public Cliente(Integer id, String nomeCliente, String email, String cpf, String senha) {
@@ -51,6 +63,7 @@ public class Cliente implements Serializable {
 		this.email = email;
 		this.cpf = cpf;
 		this.senha = senha;
+		addPerfil(Perfil.CLIENTE);
 	}
 	
 	public Cliente(ClienteNewDTO obj) {
@@ -114,6 +127,14 @@ public class Cliente implements Serializable {
 
 	public void setTelefone(TelefoneCliente telefones) {
 		this.telefone = telefones;
+	}
+	
+	public Set<Perfil> getPerfis() {
+		return perfis.stream().map(x -> Perfil.toEnum(x)).collect(Collectors.toSet());
+	}
+	
+	public void addPerfil(Perfil perfil) {
+		perfis.add(perfil.getCod());
 	}
 
 	public List<Reserva> getReservas() {

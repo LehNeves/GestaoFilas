@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort.Direction;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.gestaofilas.services.exceptions.DataIntegrityException;
@@ -26,6 +27,9 @@ import com.gestaofilas.entity.dto.RestauranteUpdateDTO;
 
 @Service
 public class RestauranteService {
+	
+	@Autowired
+	BCryptPasswordEncoder bCrypt;
 	
 	@Autowired
 	RestauranteDAO restauranteRepo;
@@ -60,11 +64,12 @@ public class RestauranteService {
 		return restauranteRepo.findAll(pageRequest);
 	}
 	
-	public Restaurante insert(RestauranteNewDTO obj) {
-		Restaurante restaurante = new Restaurante(obj);
+	public Restaurante insert(RestauranteNewDTO objDto) {
+		objDto.setSenha(bCrypt.encode(objDto.getSenha()));
+		Restaurante restaurante = new Restaurante(objDto);
 		List<Categoria> categorias = new ArrayList<Categoria>();
 		
-		categorias = categoriaRepo.findAllById(obj.getIdsCategoria());
+		categorias = categoriaRepo.findAllById(objDto.getIdsCategoria());
 		
 		restaurante.setCategorias(categorias);
 		
@@ -73,14 +78,14 @@ public class RestauranteService {
 			categoriaRepo.save(x);
 		}
 		
-		EnderecoRestaurante enderecoRestaurante = new EnderecoRestaurante(obj);
-		Cidade cidade = new Cidade(obj.getCidade(), null, null);
+		EnderecoRestaurante enderecoRestaurante = new EnderecoRestaurante(objDto);
+		Cidade cidade = new Cidade(objDto.getCidade(), null, null);
 		enderecoRestaurante.setCidade(cidade);
 		restaurante.setEndereco(enderecoRestaurante);
-		restaurante.setTelefonesRestaurante(obj.getTelefones());
+		restaurante.setTelefonesRestaurante(objDto.getTelefones());
 		enderecoRepo.save(enderecoRestaurante);
 		restaurante = restauranteRepo.save(restaurante);
-		for(TelefoneRestaurante x : obj.getTelefones()) {
+		for(TelefoneRestaurante x : objDto.getTelefones()) {
 			TelefoneRestaurante tel = new TelefoneRestaurante(null, x.getDdd(), x.getTelefone());
 			telefoneRepo.save(tel);
 		}
