@@ -19,6 +19,9 @@ import com.gestaofilas.entity.EnderecoCliente;
 import com.gestaofilas.entity.TelefoneCliente;
 import com.gestaofilas.entity.dto.ClienteNewDTO;
 import com.gestaofilas.entity.dto.ClienteUpdateDTO;
+import com.gestaofilas.entity.enums.Perfil;
+import com.gestaofilas.security.UserSS;
+import com.gestaofilas.services.exceptions.AuthorizationException;
 import com.gestaofilas.services.exceptions.DataIntegrityException;
 import com.gestaofilas.services.exceptions.ObjectNotFoundException;
 
@@ -42,6 +45,12 @@ public class ClienteService {
 	}
 	
 	public Cliente findById(Integer id) {
+		
+		UserSS user = UserService.authenticated();
+		if (user==null || !user.hasRole(Perfil.ADMIN) && !id.equals(user.getId())) {
+			throw new AuthorizationException("Acesso negado");
+		}
+		
 		Optional<Cliente> obj = clienteRepo.findById(id);
 		return obj.orElseThrow(() -> new ObjectNotFoundException(
 				"Objeto não encontrado! Id: " + id + ", Tipo: " + Cliente.class.getName()));
@@ -96,7 +105,6 @@ public class ClienteService {
 		}else {
 			throw new DataIntegrityException("Este Cliente não pode ser deletado");
 		}
-		
 	}
 	
 }

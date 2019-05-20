@@ -60,7 +60,6 @@ public class UserSS implements UserDetails {
 
 	@Override
 	public boolean isAccountNonLocked() {
-		// TODO Auto-generated method stub
 		return true;
 	}
 
@@ -71,8 +70,11 @@ public class UserSS implements UserDetails {
 
 	@Override
 	public boolean isEnabled() {
-		// TODO Auto-generated method stub
 		return true;
+	}
+	
+	public boolean hasRole(Perfil perfil) {
+		return getAuthorities().contains(new SimpleGrantedAuthority(perfil.getDescricao()));
 	}
 
 }

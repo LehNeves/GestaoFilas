@@ -9,6 +9,7 @@ import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
+import com.gestaofilas.services.exceptions.AuthorizationException;
 import com.gestaofilas.services.exceptions.DataIntegrityException;
 import com.gestaofilas.services.exceptions.ObjectNotFoundException;
 
@@ -37,6 +38,13 @@ public class ControllerExceptionHandler {
 			err.addErrors(x.getField(), x.getDefaultMessage());
 		}
 		return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(err);
+	}
+	
+	@ExceptionHandler(AuthorizationException.class)
+	public ResponseEntity<StandardError> authorization(AuthorizationException e, HttpServletRequest request) {
+		
+		StandardError err = new StandardError(System.currentTimeMillis(), HttpStatus.FORBIDDEN.value(), "Acesso negado", request.getRequestURI());
+		return ResponseEntity.status(HttpStatus.FORBIDDEN).body(err);
 	}
 	
 }
