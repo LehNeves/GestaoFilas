@@ -42,7 +42,7 @@ public class ReservaRest {
 			@RequestParam(value="page", defaultValue="0") Integer page,
 			@RequestParam(value="linesPerPage", defaultValue="24") Integer linesPerPage,
 			@RequestParam(value="orderBy", defaultValue="horaReserva") String orderBy,
-			@RequestParam(value="direction", defaultValue="ASC") String direction) {
+			@RequestParam(value="direction", defaultValue="DESC") String direction) {
 		Page<Reserva> list = service.findPage(page, linesPerPage, orderBy, direction);
 		Page<ReservaDTO> pageDto = list.map(obj -> new ReservaDTO(obj));
 		return ResponseEntity.ok().body(pageDto);
