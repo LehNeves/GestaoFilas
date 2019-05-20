@@ -114,7 +114,6 @@ public void run(String... args) throws Exception {
 		EnderecoCliente endCliente = new EnderecoCliente(null, TipoLogradouro.RUA, "Rua", "000", "bairroteste", "cepteste");
 		endCliente.setCidade(cidade);
 		
-		
 		cliente.setEndereco(endCliente);
 		
 		endClienteSave.save(endCliente);
