@@ -6,9 +6,6 @@ import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
@@ -17,21 +14,15 @@ import javax.persistence.OneToOne;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.gestaofilas.entity.dto.RestauranteNewDTO;
+import com.gestaofilas.entity.enums.Perfil;
 
 @Entity
-public class Restaurante implements Serializable {
+public class Restaurante extends Usuario implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
-	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	private Integer id;
 	private String razaoSocial;
 	private String nome;
 	private String cnpj;
-	private String email;
-	
-	@JsonIgnore
-	private String senha;
 	
 	@JsonIgnore
 	@ManyToMany
@@ -52,6 +43,7 @@ public class Restaurante implements Serializable {
 	private List<Reserva> reservas = new ArrayList<Reserva>();
 	
 	public Restaurante() {
+		addPerfil(Perfil.RESTAURANTE);
 	}
 
 	public Restaurante(Integer id, String razaoSocial, String nomeFantasia, String cnpj, String email, String senha) {
@@ -61,6 +53,7 @@ public class Restaurante implements Serializable {
 		this.cnpj = cnpj;
 		this.email = email;
 		this.senha = senha;
+		addPerfil(Perfil.RESTAURANTE);
 	}
 	
 	public Restaurante(RestauranteNewDTO obj) {
