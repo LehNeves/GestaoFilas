@@ -30,7 +30,7 @@ public class ReservaRest {
 	@Autowired
 	private ReservaService service;
 
-	@GetMapping(value="/{id}") 
+	@GetMapping(value="/{id}")
 	public ResponseEntity<ReservaDTO> find(@PathVariable Integer id){ 
 		Reserva obj = service.findById(id);
 		ReservaDTO obj2 = new ReservaDTO(obj);

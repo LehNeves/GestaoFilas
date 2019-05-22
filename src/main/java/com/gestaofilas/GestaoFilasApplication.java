@@ -12,7 +12,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import com.gestaofilas.dao.*;
 import com.gestaofilas.entity.*;
 import com.gestaofilas.entity.enums.*;
-//teste
+
 @SpringBootApplication
 public class GestaoFilasApplication implements CommandLineRunner {
 	
@@ -53,10 +53,25 @@ public class GestaoFilasApplication implements CommandLineRunner {
 		SpringApplication.run(GestaoFilasApplication.class, args);
 	}
 	
-public void run(String... args) throws Exception {
+	public void run(String... args) throws Exception {
+		
+		String[] categorias = {
+				"Asiatico",
+				"Brasileiro",
+				"Churrascaria",
+				"Vegetariano",
+				"Japonês",
+				"Caseira",
+				"Pizzaria"
+		};
 		
 		Categoria cat1 = new Categoria(null, "Teste 1");
 		Categoria cat2 = new Categoria(null, "Teste 2");
+		
+		for(int i = 0; i < categorias.length; i++) {
+			Categoria cat = new Categoria(null, categorias[i]);
+			catSave.save(cat);
+		}
 		
 		Restaurante rest1 = new Restaurante(null, "rest1", "rest1", "123", "rest1@email.com", bCrypt.encode("123"));
 		Restaurante rest2 = new Restaurante(null, "rest2", "rest2", "123", "rest2@email.com", bCrypt.encode("123"));

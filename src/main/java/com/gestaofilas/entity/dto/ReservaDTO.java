@@ -6,6 +6,7 @@ import java.util.Date;
 import com.gestaofilas.entity.Cliente;
 import com.gestaofilas.entity.Reserva;
 import com.gestaofilas.entity.Restaurante;
+import com.gestaofilas.entity.Usuario;
 
 public class ReservaDTO implements Serializable {
 	private static final long serialVersionUID = 1L;
@@ -13,8 +14,8 @@ public class ReservaDTO implements Serializable {
 	private Integer id;
 	private Date horaReserva;
 	private Integer estadoReserva;
-	private Restaurante restaurante;
-	private Cliente cliente;
+	private Usuario restaurante;
+	private Usuario cliente;
 	
 	public ReservaDTO() {
 	}
@@ -60,7 +61,7 @@ public class ReservaDTO implements Serializable {
 		this.estadoReserva = estadoReserva;
 	}
 
-	public Restaurante getRestaurante() {
+	public Usuario getRestaurante() {
 		return restaurante;
 	}
 
@@ -68,7 +69,7 @@ public class ReservaDTO implements Serializable {
 		this.restaurante = restaurante;
 	}
 
-	public Cliente getCliente() {
+	public Usuario getCliente() {
 		return cliente;
 	}
 

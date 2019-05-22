@@ -64,7 +64,7 @@ public class Reserva implements Serializable {
 		this.estadoReserva = estadoReserva.getCod();
 	}
 
-	public Restaurante getRestaurante() {
+	public Usuario getRestaurante() {
 		return restaurante;
 	}
 
@@ -72,12 +72,11 @@ public class Reserva implements Serializable {
 		this.restaurante = restaurante;
 	}
 
-	public Cliente getCliente() {
+	public Usuario getCliente() {
 		return cliente;
 	}
 
 	public void setCliente(Cliente cliente) {
 		this.cliente = cliente;
 	}
-	
 }

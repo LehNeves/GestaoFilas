@@ -6,19 +6,20 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
-import com.gestaofilas.dao.ClienteDAO;
-import com.gestaofilas.entity.Cliente;
+import com.gestaofilas.dao.UsuarioDAO;
+import com.gestaofilas.entity.Usuario;
 import com.gestaofilas.security.UserSS;
 
 @Service
 public class UserDetailsServiceImpl implements UserDetailsService{
 	
 	@Autowired
-	private ClienteDAO clienteRepo;
+	private UsuarioDAO repo;
 
 	@Override
 	public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
-		Cliente obj = clienteRepo.findByEmail(email);
+		Usuario obj = repo.findByEmail(email);
+		
 		if(obj == null) {
 			throw new UsernameNotFoundException(email);
 		}

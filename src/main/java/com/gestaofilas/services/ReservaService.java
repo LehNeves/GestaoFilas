@@ -27,10 +27,13 @@ public class ReservaService {
 	ReservaDAO repo;
 	
 	@Autowired
-	ClienteService clienteService;
+	UsuarioService usuarioService;
 	
 	@Autowired
 	RestauranteService restauranteService;
+	
+	@Autowired
+	ClienteService clienteService;
 	
 	public Reserva findById(Integer id) {
 		Optional<Reserva> obj = repo.findById(id);
@@ -50,9 +53,9 @@ public class ReservaService {
 		
 		PageRequest pageRequest = PageRequest.of(page, linesPerPage, Direction.valueOf(direction), orderBy);
 		
-		Cliente cli = clienteService.findById(user.getId());
+		Cliente cliente = clienteService.findById(user.getId());
 		
-		return repo.findByCliente(cli, pageRequest);
+		return repo.findByCliente(cliente, pageRequest);
 	}
 	
 	public Reserva insert (ReservaNewDTO objDto) {

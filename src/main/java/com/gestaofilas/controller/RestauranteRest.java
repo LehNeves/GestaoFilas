@@ -60,6 +60,7 @@ public class RestauranteRest {
 	}
 	
 	@PostMapping
+	@PreAuthorize("hasAnyRole('RESTAURANTE', 'ADMIN')")
 	public ResponseEntity<Void> insert(@Valid @RequestBody RestauranteNewDTO obj){
 		Restaurante obj2 = service.insert(obj);
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(obj2.getId()).toUri();
@@ -67,6 +68,7 @@ public class RestauranteRest {
 	}
 	
 	@PutMapping(value="/{id}")
+	@PreAuthorize("hasAnyRole('RESTAURANTE', 'ADMIN')")
 	public ResponseEntity<Void> update(@Valid @PathVariable Integer id, @RequestBody RestauranteUpdateDTO objDto){
 		service.update(objDto);
 		return ResponseEntity.noContent().build();

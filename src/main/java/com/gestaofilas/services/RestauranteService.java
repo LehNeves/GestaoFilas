@@ -11,6 +11,7 @@ import org.springframework.data.domain.Sort.Direction;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import com.gestaofilas.services.exceptions.AuthorizationException;
 import com.gestaofilas.services.exceptions.DataIntegrityException;
 import com.gestaofilas.services.exceptions.ObjectNotFoundException;
 import com.gestaofilas.dao.CategoriaDAO;
@@ -24,6 +25,8 @@ import com.gestaofilas.entity.Restaurante;
 import com.gestaofilas.entity.TelefoneRestaurante;
 import com.gestaofilas.entity.dto.RestauranteNewDTO;
 import com.gestaofilas.entity.dto.RestauranteUpdateDTO;
+import com.gestaofilas.entity.enums.Perfil;
+import com.gestaofilas.security.UserSS;
 
 @Service
 public class RestauranteService {
@@ -48,6 +51,12 @@ public class RestauranteService {
 	}
 	
 	public Restaurante findById(Integer id) {
+		
+		UserSS user = UserService.authenticated();
+		if (user==null || !user.hasRole(Perfil.ADMIN) && !id.equals(user.getId())) {
+			throw new AuthorizationException("Acesso negado");
+		}
+		
 		Optional<Restaurante> obj = restauranteRepo.findById(id);
 		return obj.orElseThrow(() -> new ObjectNotFoundException(
 				"Objeto não encontrado! Id: " + id + ", Tipo: " + Restaurante.class.getName()));
