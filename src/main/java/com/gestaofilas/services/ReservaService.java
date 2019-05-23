@@ -15,6 +15,7 @@ import com.gestaofilas.entity.Reserva;
 import com.gestaofilas.entity.Restaurante;
 import com.gestaofilas.entity.dto.ReservaNewDTO;
 import com.gestaofilas.entity.enums.EstadoReserva;
+import com.gestaofilas.entity.enums.Perfil;
 import com.gestaofilas.security.UserSS;
 import com.gestaofilas.services.exceptions.AuthorizationException;
 import com.gestaofilas.services.exceptions.ObjectNotFoundException;
@@ -53,9 +54,15 @@ public class ReservaService {
 		
 		PageRequest pageRequest = PageRequest.of(page, linesPerPage, Direction.valueOf(direction), orderBy);
 		
-		Cliente cliente = clienteService.findById(user.getId());
+		if(user.hasRole(Perfil.CLIENTE)) {
+			Cliente cliente = clienteService.findById(user.getId());
+			return repo.findByCliente(cliente, pageRequest);
+		}else if(user.hasRole(Perfil.RESTAURANTE)) {
+			Restaurante restaurante = restauranteService.findById(user.getId());
+			return repo.findByRestaurante(restaurante, pageRequest);
+		}
 		
-		return repo.findByCliente(cliente, pageRequest);
+		return repo.findAll(pageRequest);
 	}
 	
 	public Reserva insert (ReservaNewDTO objDto) {

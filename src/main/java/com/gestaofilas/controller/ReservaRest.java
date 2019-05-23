@@ -7,6 +7,7 @@ import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -49,19 +50,21 @@ public class ReservaRest {
 	}
 	
 	@PostMapping
-	public ResponseEntity<Reserva> insert (@Valid @RequestBody ReservaNewDTO obj){
+	@PreAuthorize("hasAnyRole('ADMIN', 'CLIENTE')")
+	public ResponseEntity<ReservaNewDTO> insert (@Valid @RequestBody ReservaNewDTO obj){
 		Reserva obj2 = service.insert(obj);
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(obj2.getId()).toUri();
 		return ResponseEntity.created(uri).build();
 	}
 
-	@PutMapping(value="/{id}") 
+	@PutMapping(value="/{id}")
 	public ResponseEntity<Void> update(@PathVariable Integer id, @RequestBody Reserva obj) { 
 		obj.setId(id); 
 		obj = service.update(obj); return ResponseEntity.noContent().build(); 
 	}
 
-	@DeleteMapping(value="/{id}") 
+	@DeleteMapping(value="/{id}")
+	@PreAuthorize("hasAnyRole('ADMIN')")
 	public ResponseEntity<Void> delete(@PathVariable Integer id){ 
 		service.delete(id);
 		return ResponseEntity.noContent().build(); 

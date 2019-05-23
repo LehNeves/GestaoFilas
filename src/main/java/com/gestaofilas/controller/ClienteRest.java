@@ -48,6 +48,7 @@ public class ClienteRest {
 		}
 	
 	@GetMapping(value="/{id}")
+	@PreAuthorize("hasAnyRole('ADMIN', 'CLIENTE')")
 	public ResponseEntity<ClienteDTO2> findByID(@PathVariable Integer id){
 		Cliente obj = service.findById(id);
 		ClienteDTO2 objDto = new ClienteDTO2(obj);
@@ -61,7 +62,8 @@ public class ClienteRest {
 		return ResponseEntity.created(uri).build();
 	}
 	
-	@PutMapping(value="/{id}") 
+	@PutMapping(value="/{id}")
+	@PreAuthorize("hasAnyRole('ADMIN', 'CLIENTE')")
     public ResponseEntity<Void> update(@Valid @PathVariable Integer id, @RequestBody ClienteUpdateDTO obj) { 
         obj.setId(id); 
         service.update(obj); 

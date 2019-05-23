@@ -6,7 +6,6 @@ import java.util.Date;
 import com.gestaofilas.entity.Cliente;
 import com.gestaofilas.entity.Reserva;
 import com.gestaofilas.entity.Restaurante;
-import com.gestaofilas.entity.Usuario;
 
 public class ReservaDTO implements Serializable {
 	private static final long serialVersionUID = 1L;
@@ -14,8 +13,8 @@ public class ReservaDTO implements Serializable {
 	private Integer id;
 	private Date horaReserva;
 	private Integer estadoReserva;
-	private Usuario restaurante;
-	private Usuario cliente;
+	private RestauranteDTO restaurante;
+	private ClienteDTO cliente;
 	
 	public ReservaDTO() {
 	}
@@ -25,16 +24,16 @@ public class ReservaDTO implements Serializable {
 		this.id = id;
 		this.horaReserva = horaReserva;
 		this.estadoReserva = estadoReserva;
-		this.restaurante = restaurante;
-		this.cliente = cliente;
+		this.restaurante = new RestauranteDTO(restaurante);
+		this.cliente = new ClienteDTO(cliente);
 	}
 	
 	public ReservaDTO(Reserva obj) {
 		this.id = obj.getId();
 		this.horaReserva = obj.getHoraReserva();
 		this.estadoReserva = obj.getEstadoReserva().getCod();
-		this.restaurante = obj.getRestaurante();
-		this.cliente = obj.getCliente();
+		this.restaurante = new RestauranteDTO((Restaurante) obj.getRestaurante());
+		this.cliente = new ClienteDTO((Cliente) obj.getCliente());
 	}
 
 	public Integer getId() {
@@ -61,19 +60,19 @@ public class ReservaDTO implements Serializable {
 		this.estadoReserva = estadoReserva;
 	}
 
-	public Usuario getRestaurante() {
+	public RestauranteDTO getRestaurante() {
 		return restaurante;
 	}
 
-	public void setRestaurante(Restaurante restaurante) {
+	public void setRestaurante(RestauranteDTO restaurante) {
 		this.restaurante = restaurante;
 	}
 
-	public Usuario getCliente() {
+	public ClienteDTO getCliente() {
 		return cliente;
 	}
 
-	public void setCliente(Cliente cliente) {
+	public void setCliente(ClienteDTO cliente) {
 		this.cliente = cliente;
 	}
 
