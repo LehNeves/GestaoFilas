@@ -1,6 +1,8 @@
 package com.gestaofilas.controller;
 
 import java.net.URI;
+import java.util.List;
+import java.util.stream.Collectors;
 
 import javax.validation.Valid;
 
@@ -15,6 +17,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
@@ -70,6 +73,13 @@ public class CategoriaRest {
 	public ResponseEntity<Void> delete(@PathVariable Integer id){
 		service.delete(id);
 		return ResponseEntity.noContent().build();
+	}
+	
+	@GetMapping(value="/list")
+	public ResponseEntity<List<CategoriaDTO2>> findAll() {
+		List<Categoria> list = service.findAll();
+		List<CategoriaDTO2> listDto = list.stream().map(obj -> new CategoriaDTO2(obj)).collect(Collectors.toList());  
+		return ResponseEntity.ok().body(listDto);
 	}
 
 }
