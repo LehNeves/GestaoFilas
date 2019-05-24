@@ -77,7 +77,7 @@ public class ClienteRest {
         return ResponseEntity.noContent().build(); 
     }
 	
-	@GetMapping(value="/{email}")
+	@GetMapping(value="/email/{email}")
 	@PreAuthorize("hasAnyRole('ADMIN', 'CLIENTE')")
 	public ResponseEntity<ClienteDTO2> findByEmail(@PathVariable String email){
 		Cliente obj = service.findByEmail(email);
