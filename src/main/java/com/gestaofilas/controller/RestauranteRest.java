@@ -2,6 +2,7 @@ package com.gestaofilas.controller;
 
 import java.net.URI;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import javax.validation.Valid;
 
@@ -51,6 +52,14 @@ public class RestauranteRest {
 		
 		return ResponseEntity.ok().body(listdto);
 	}
+	
+	@GetMapping(value="/list")
+	public ResponseEntity<List<RestauranteDTO>> listRestaurante(){
+		List<Restaurante> list = service.findAll();
+		List<RestauranteDTO> listDto = list.stream().map(obj -> new RestauranteDTO(obj)).collect(Collectors.toList());  
+		return ResponseEntity.ok().body(listDto);
+	}
+	
 	
 	@GetMapping(value="/{id}")
 	public ResponseEntity<RestauranteDTO2> findByID(@PathVariable Integer id){

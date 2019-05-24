@@ -147,7 +147,7 @@ public class GestaoFilasApplication implements CommandLineRunner {
 		reserva.setRestaurante(rest1);
 		reservaSave.save(reserva);
 		
-		Usuario usuario = new Usuario(null, "admin", "123");
+		Usuario usuario = new Usuario(null, "admin", bCrypt.encode("123"));
 		usuario.addPerfil(Perfil.ADMIN);
 		usuarioSave.save(usuario);
 		
