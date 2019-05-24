@@ -48,6 +48,9 @@ public class GestaoFilasApplication implements CommandLineRunner {
 	
 	@Autowired
 	private ReservaDAO reservaSave;
+	
+	@Autowired
+	private UsuarioDAO usuarioSave;
 
 	public static void main(String[] args) {
 		SpringApplication.run(GestaoFilasApplication.class, args);
@@ -143,5 +146,10 @@ public class GestaoFilasApplication implements CommandLineRunner {
 		reserva.setCliente(cliente);
 		reserva.setRestaurante(rest1);
 		reservaSave.save(reserva);
+		
+		Usuario usuario = new Usuario(null, "admin", "123");
+		usuario.addPerfil(Perfil.ADMIN);
+		usuarioSave.save(usuario);
+		
 	}
 }

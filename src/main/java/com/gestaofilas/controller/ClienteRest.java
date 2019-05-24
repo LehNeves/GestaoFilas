@@ -76,5 +76,7 @@ public class ClienteRest {
         service.delete(id);
         return ResponseEntity.noContent().build(); 
     }
+	
+	
 
 }
