@@ -49,7 +49,7 @@ public class ClienteRest {
 	
 	@GetMapping(value="/{id}")
 	@PreAuthorize("hasAnyRole('ADMIN', 'CLIENTE')")
-	public ResponseEntity<ClienteDTO2> findByID(@PathVariable Integer id){
+	public ResponseEntity<ClienteDTO2> findById(@PathVariable Integer id){
 		Cliente obj = service.findById(id);
 		ClienteDTO2 objDto = new ClienteDTO2(obj);
 		return ResponseEntity.ok().body(objDto);
@@ -77,6 +77,11 @@ public class ClienteRest {
         return ResponseEntity.noContent().build(); 
     }
 	
-	
-
+	@GetMapping(value="/{email}")
+	@PreAuthorize("hasAnyRole('ADMIN', 'CLIENTE')")
+	public ResponseEntity<ClienteDTO2> findByEmail(@PathVariable String email){
+		Cliente obj = service.findByEmail(email);
+		ClienteDTO2 objDto = new ClienteDTO2(obj);
+		return ResponseEntity.ok().body(objDto);
+	}
 }
