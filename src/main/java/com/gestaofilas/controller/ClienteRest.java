@@ -57,6 +57,7 @@ public class ClienteRest {
 	
 	@PostMapping
 	public ResponseEntity<ClienteDTO> insert (@Valid @RequestBody ClienteNewDTO obj){
+		System.out.print(obj);
 		Cliente obj2 = service.insert(obj);
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(obj2.getId()).toUri();
 		return ResponseEntity.created(uri).build();

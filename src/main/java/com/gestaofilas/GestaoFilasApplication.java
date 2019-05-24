@@ -79,8 +79,8 @@ public class GestaoFilasApplication implements CommandLineRunner {
 		Restaurante rest1 = new Restaurante(null, "rest1", "rest1", "123", "rest1@email.com", bCrypt.encode("123"));
 		Restaurante rest2 = new Restaurante(null, "rest2", "rest2", "123", "rest2@email.com", bCrypt.encode("123"));
 		
-		EnderecoRestaurante endRestaurante = new EnderecoRestaurante(null, TipoLogradouro.RUA, "rua", "123", "", "bairro", "cep");
-		EnderecoRestaurante endRestaurante2 = new EnderecoRestaurante(null, TipoLogradouro.RUA, "rua2", "123", "", "bairro", "cep");
+		EnderecoRestaurante endRestaurante = new EnderecoRestaurante(null, "rua", "123", "", "bairro", "cep");
+		EnderecoRestaurante endRestaurante2 = new EnderecoRestaurante(null, "rua2", "123", "", "bairro", "cep");
 
 		Cidade cidade = new Cidade(null, "Cidade1", null);
 
@@ -129,7 +129,7 @@ public class GestaoFilasApplication implements CommandLineRunner {
 		
 		telCliente1.setCliente(cliente);
 		
-		EnderecoCliente endCliente = new EnderecoCliente(null, TipoLogradouro.RUA, "Rua", "000", "bairroteste", "cepteste");
+		EnderecoCliente endCliente = new EnderecoCliente(null, "Rua", "000", "bairroteste", "cepteste");
 		endCliente.setCidade(cidade);
 		
 		cliente.setEndereco(endCliente);

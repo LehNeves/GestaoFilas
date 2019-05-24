@@ -10,7 +10,7 @@ import com.gestaofilas.entity.Cliente;
 public interface ClienteDAO extends JpaRepository<Cliente, Integer>{
 	
 	@Transactional(readOnly=true)
-	Boolean findByCpf(String cpf);
+	Cliente findByCpf(String cpf);
 	
 	@Transactional(readOnly=true)
 	Cliente findByEmail(String email);

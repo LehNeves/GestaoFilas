@@ -3,6 +3,7 @@ package com.gestaofilas.entity.dto;
 import java.io.Serializable;
 
 import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotEmpty;
 
 import org.hibernate.validator.constraints.br.CPF;
@@ -27,8 +28,6 @@ public class ClienteNewDTO implements Serializable{
 	@NotEmpty(message="Preenchimento obrigatório")
 	private String senha;
 	
-	private Integer tipoLogradouro;
-	
 	@NotEmpty(message="Preenchimento obrigatório")
 	private String logradouro;
 	
@@ -43,37 +42,30 @@ public class ClienteNewDTO implements Serializable{
 	@NotEmpty(message="Preenchimento obrigatório")
 	private String cep;
 	
-	private Integer cidade;
+	private Integer cidadeId;
 	
 	private Integer ddd;
-	
 	@NotEmpty(message="Preenchimento obrigatório")
 	private String telefone;
-	
-	private Integer ddd2;
-	private String telefone2;
 	
 	public ClienteNewDTO() {
 	}
 
 	public ClienteNewDTO(String nome, String email, String cpf, String senha,
-			Integer tipoLogradouro, String logradouro, String numero, String complemento, String bairro, String cep,
-			Integer cidade, Integer ddd, String telefone, Integer ddd2, String telefone2) {
+			String logradouro, String numero, String complemento, String bairro, String cep,
+			Integer cidadeId, Integer ddd, String telefone) {
 		this.nome = nome;
 		this.email = email;
 		this.cpf = cpf;
 		this.senha = senha;
-		this.tipoLogradouro = tipoLogradouro;
 		this.logradouro = logradouro;
 		this.numero = numero;
 		this.complemento = complemento;
 		this.bairro = bairro;
 		this.cep = cep;
-		this.cidade = cidade;
+		this.cidadeId = cidadeId;
 		this.ddd = ddd;
 		this.telefone = telefone;
-		this.ddd2 = ddd2;
-		this.telefone2 = telefone2;
 	}
 
 	public String getNome() {
@@ -106,14 +98,6 @@ public class ClienteNewDTO implements Serializable{
 
 	public void setSenha(String senha) {
 		this.senha = senha;
-	}
-
-	public Integer getTipoLogradouro() {
-		return tipoLogradouro;
-	}
-
-	public void setTipoLogradouro(Integer tipoLogradouro) {
-		this.tipoLogradouro = tipoLogradouro;
 	}
 
 	public String getLogradouro() {
@@ -157,11 +141,11 @@ public class ClienteNewDTO implements Serializable{
 	}
 
 	public Integer getCidade() {
-		return cidade;
+		return cidadeId;
 	}
 
 	public void setCidade(Integer cidade) {
-		this.cidade = cidade;
+		this.cidadeId = cidade;
 	}
 
 	public Integer getDdd() {
@@ -180,20 +164,12 @@ public class ClienteNewDTO implements Serializable{
 		this.telefone = telefone;
 	}
 
-	public Integer getDdd2() {
-		return ddd2;
+	@Override
+	public String toString() {
+		return "ClienteNewDTO [nome=" + nome + ", email=" + email + ", cpf=" + cpf + ", senha=" + senha
+				+ ", logradouro=" + logradouro + ", numero=" + numero + ", complemento=" + complemento + ", bairro="
+				+ bairro + ", cep=" + cep + ", cidade=" + cidadeId + ", ddd=" + ddd + ", telefone=" + telefone + "]";
 	}
-
-	public void setDdd2(Integer ddd2) {
-		this.ddd2 = ddd2;
-	}
-
-	public String getTelefone2() {
-		return telefone2;
-	}
-
-	public void setTelefone2(String telefone2) {
-		this.telefone2 = telefone2;
-	}
-
+	
+	
 }

@@ -10,7 +10,6 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
 import com.gestaofilas.entity.dto.RestauranteNewDTO;
-import com.gestaofilas.entity.enums.TipoLogradouro;
 
 @Entity
 public class EnderecoRestaurante implements Serializable {
@@ -19,7 +18,6 @@ public class EnderecoRestaurante implements Serializable {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Integer id;
-	private Integer tipoLogradouro;
 	private String logradouro;
 	private String numero;
 	private String complemento;
@@ -33,9 +31,8 @@ public class EnderecoRestaurante implements Serializable {
 	public EnderecoRestaurante() {
 	}
 
-	public EnderecoRestaurante(Integer id, TipoLogradouro tipoLogradouro, String logradouro, String numero, String complemento, String bairro, String cep) {
+	public EnderecoRestaurante(Integer id, String logradouro, String numero, String complemento, String bairro, String cep) {
 		this.id = id;
-		this.tipoLogradouro = (tipoLogradouro==null) ? null : tipoLogradouro.getCod();
 		this.logradouro = logradouro;
 		this.numero = numero;
 		this.complemento = (complemento==null) ? null: complemento;
@@ -44,7 +41,6 @@ public class EnderecoRestaurante implements Serializable {
 	}
 	
 	public EnderecoRestaurante(RestauranteNewDTO obj) {
-		this.tipoLogradouro = (obj.getTipoLogradouro()==null) ? null : obj.getTipoLogradouro();
 		this.logradouro = obj.getLogradouro();
 		this.numero = obj.getNumero();
 		this.complemento = (obj.getComplemento()==null) ? null: obj.getComplemento();
@@ -106,14 +102,6 @@ public class EnderecoRestaurante implements Serializable {
 
 	public void setCidade(Cidade cidade) {
 		this.cidade = cidade;
-	}
-	
-	public TipoLogradouro getTipoLogradouro() {
-		return TipoLogradouro.toEnum(tipoLogradouro);
-	}
-
-	public void setTipoLogradouro(TipoLogradouro tipoLogradouro) {
-		this.tipoLogradouro = tipoLogradouro.getCod();
 	}
 	
 }

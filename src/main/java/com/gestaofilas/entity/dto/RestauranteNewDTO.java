@@ -33,8 +33,6 @@ public class RestauranteNewDTO implements Serializable {
 	@NotEmpty(message="Preenchimento obrigatório")
 	private String senha;
 	
-	private Integer tipoLogradouro;
-	
 	@NotEmpty(message="Preenchimento obrigatório")
 	private String logradouro;
 	
@@ -59,7 +57,7 @@ public class RestauranteNewDTO implements Serializable {
 	}
 
 	public RestauranteNewDTO(String razaoSocial, String nome, String cnpj, String email, String senha,
-			Integer tipoLogradouro, String logradouro, String numero, String complemento, String bairro, String cep,
+			String logradouro, String numero, String complemento, String bairro, String cep,
 			Integer cidade, List<TelefoneRestaurante> telefones, List<Integer> idsCategoria) {
 		super();
 		this.razaoSocial = razaoSocial;
@@ -67,7 +65,6 @@ public class RestauranteNewDTO implements Serializable {
 		this.cnpj = cnpj;
 		this.email = email;
 		this.senha = senha;
-		this.tipoLogradouro = tipoLogradouro;
 		this.logradouro = logradouro;
 		this.numero = numero;
 		this.complemento = complemento;
@@ -116,14 +113,6 @@ public class RestauranteNewDTO implements Serializable {
 
 	public void setSenha(String senha) {
 		this.senha = senha;
-	}
-
-	public Integer getTipoLogradouro() {
-		return tipoLogradouro;
-	}
-
-	public void setTipoLogradouro(Integer tipoLogradouro) {
-		this.tipoLogradouro = tipoLogradouro;
 	}
 
 	public String getLogradouro() {

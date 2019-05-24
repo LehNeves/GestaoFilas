@@ -36,8 +36,8 @@ public class ClienteInsertValidator implements ConstraintValidator<ClienteInsert
 		if(aux != null) {
 			list.add(new FieldMessage("email", "Email já existente"));
 		}
-		
-		if(repo.findByCpf(objDto.getCpf())) {
+		Cliente aux2 = repo.findByCpf(objDto.getCpf());
+		if(aux2 != null) {
 			list.add(new FieldMessage("cpf", "cpf já existente"));
 		}
 		

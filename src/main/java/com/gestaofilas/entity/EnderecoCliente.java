@@ -10,7 +10,6 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
 import com.gestaofilas.entity.dto.ClienteNewDTO;
-import com.gestaofilas.entity.enums.TipoLogradouro;
 
 @Entity
 public class EnderecoCliente implements Serializable {
@@ -19,7 +18,6 @@ public class EnderecoCliente implements Serializable {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Integer id;
-	private Integer tipoLogradouro;
 	private String logradouro;
 	private String numero;
 	private String complemento;
@@ -33,9 +31,8 @@ public class EnderecoCliente implements Serializable {
 	public EnderecoCliente() {
 	}
 
-	public EnderecoCliente(Integer id, TipoLogradouro tipoLogradouro, String logradouro, String numero, String bairro, String cep) {
+	public EnderecoCliente(Integer id, String logradouro, String numero, String bairro, String cep) {
 		this.id = id;
-		this.tipoLogradouro = (tipoLogradouro==null) ? null : tipoLogradouro.getCod();
 		this.logradouro = logradouro;
 		this.numero = numero;
 		this.bairro = bairro;
@@ -43,7 +40,6 @@ public class EnderecoCliente implements Serializable {
 	}
 	
 	public EnderecoCliente(ClienteNewDTO obj) {
-		this.tipoLogradouro = (obj.getTipoLogradouro()==null) ? null : obj.getTipoLogradouro();
 		this.logradouro = obj.getLogradouro();
 		this.numero = obj.getNumero();
 		this.complemento = (obj.getComplemento()==null) ? null: obj.getComplemento();
@@ -107,11 +103,4 @@ public class EnderecoCliente implements Serializable {
 		this.cidade = cidade;
 	}
 	
-	public TipoLogradouro getTipoLogradouro() {
-		return TipoLogradouro.toEnum(tipoLogradouro);
-	}
-
-	public void setTipoLogradouro(TipoLogradouro tipoLogradouro) {
-		this.tipoLogradouro = tipoLogradouro.getCod();
-	}
 }
