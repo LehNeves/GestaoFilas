@@ -41,7 +41,7 @@ public class ReservaService {
 		return obj.orElseThrow(() -> new ObjectNotFoundException(
 				"Objeto não encontrado! Id: " + id + ", Tipo: " + Reserva.class.getName()));
 	}
-	
+
 	public List<Reserva> findAll() {
 		return repo.findAll();
 	}
