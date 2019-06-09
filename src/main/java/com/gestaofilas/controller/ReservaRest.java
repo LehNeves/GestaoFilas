@@ -1,8 +1,6 @@
 package com.gestaofilas.controller;
 
 import java.net.URI;
-import java.util.List;
-import java.util.stream.Collectors;
 
 import javax.validation.Valid;
 
@@ -22,10 +20,8 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.gestaofilas.entity.Reserva;
-import com.gestaofilas.entity.Restaurante;
 import com.gestaofilas.entity.dto.ReservaDTO;
 import com.gestaofilas.entity.dto.ReservaNewDTO;
-import com.gestaofilas.entity.dto.RestauranteDTO;
 import com.gestaofilas.services.ReservaService;
 
 @RestController
@@ -51,13 +47,6 @@ public class ReservaRest {
 		Page<Reserva> list = service.findPage(page, linesPerPage, orderBy, direction);
 		Page<ReservaDTO> pageDto = list.map(obj -> new ReservaDTO(obj));
 		return ResponseEntity.ok().body(pageDto);
-	}
-	
-	@GetMapping(value="/list")
-	public ResponseEntity<List<ReservaDTO>> listReserva(){
-		List<Reserva> list = service.findAll();
-		List<ReservaDTO> listDto = list.stream().map(obj -> new ReservaDTO(obj)).collect(Collectors.toList());  
-		return ResponseEntity.ok().body(listDto);
 	}
 	
 	@PostMapping

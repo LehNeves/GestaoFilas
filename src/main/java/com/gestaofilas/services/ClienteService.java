@@ -16,6 +16,7 @@ import com.gestaofilas.dao.TelClienteDAO;
 import com.gestaofilas.entity.Cidade;
 import com.gestaofilas.entity.Cliente;
 import com.gestaofilas.entity.EnderecoCliente;
+import com.gestaofilas.entity.Reserva;
 import com.gestaofilas.entity.TelefoneCliente;
 import com.gestaofilas.entity.dto.ClienteNewDTO;
 import com.gestaofilas.entity.dto.ClienteUpdateDTO;
@@ -121,6 +122,16 @@ public class ClienteService {
 		}
 		
 		return obj;
+	}
+
+	public List<Reserva> findReserva(Integer id) {
+		
+		Cliente obj = findById(id);
+		
+		List<Reserva> list = obj.getReservas();
+		
+		
+		return list;
 	}
 	
 }

@@ -1,5 +1,7 @@
 package com.gestaofilas.dao;
 
+import java.util.List;
+
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -18,5 +20,11 @@ public interface ReservaDAO extends JpaRepository<Reserva, Integer>{
 	
 	@Transactional(readOnly=true)
 	Page<Reserva> findByRestaurante(Restaurante restaurante, Pageable pageRequest);
+	
+	@Transactional(readOnly=true)
+	List<Reserva> findByCliente(Cliente cliente);
+	
+	@Transactional(readOnly=true)
+	List<Reserva> findByRestaurante(Restaurante restaurante);
 
 }

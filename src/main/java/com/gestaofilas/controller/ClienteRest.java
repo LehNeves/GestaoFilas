@@ -1,6 +1,8 @@
 package com.gestaofilas.controller;
 
 import java.net.URI;
+import java.util.List;
+import java.util.stream.Collectors;
 
 import javax.validation.Valid;
 
@@ -20,10 +22,12 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.gestaofilas.entity.Cliente;
+import com.gestaofilas.entity.Reserva;
 import com.gestaofilas.entity.dto.ClienteDTO;
 import com.gestaofilas.entity.dto.ClienteDTO2;
 import com.gestaofilas.entity.dto.ClienteNewDTO;
 import com.gestaofilas.entity.dto.ClienteUpdateDTO;
+import com.gestaofilas.entity.dto.ReservaDTO;
 import com.gestaofilas.services.ClienteService;
 
 @RestController
@@ -80,9 +84,17 @@ public class ClienteRest {
 	
 	@GetMapping(value="/email/{email}")
 	@PreAuthorize("hasAnyRole('ADMIN', 'CLIENTE')")
-	public ResponseEntity<ClienteDTO2> findByEmail(@PathVariable String email){
+	public ResponseEntity<ClienteDTO> findByEmail(@PathVariable String email){
 		Cliente obj = service.findByEmail(email);
-		ClienteDTO2 objDto = new ClienteDTO2(obj);
+		ClienteDTO objDto = new ClienteDTO(obj);
+		return ResponseEntity.ok().body(objDto);
+	}
+	
+	@GetMapping(value="/{id}/reservas")
+	@PreAuthorize("hasAnyRole('ADMIN', 'CLIENTE')")
+	public ResponseEntity<List<ReservaDTO>> findResevas(@PathVariable Integer id){
+		List<Reserva> list = service.findReserva(id);
+		List<ReservaDTO> objDto = list.stream().map(obj -> new ReservaDTO(obj)).collect(Collectors.toList());
 		return ResponseEntity.ok().body(objDto);
 	}
 }

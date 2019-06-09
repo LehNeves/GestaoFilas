@@ -84,4 +84,20 @@ public class ReservaService {
 		Reserva obj = findById(id);
 		repo.deleteById(obj.getId());
 	}
+	
+	public List<Reserva> findByCliente(Integer id){
+		
+		UserSS user = UserService.authenticated();
+		if(user == null) {
+			throw new AuthorizationException("Acesso negado");
+		}
+		
+		if(user.hasRole(Perfil.CLIENTE)) {
+			Cliente cliente = clienteService.findById(user.getId());
+			return repo.findByCliente(cliente);
+		}
+		
+		return null;
+	}
+	
 }
