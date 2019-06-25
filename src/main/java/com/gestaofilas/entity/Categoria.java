@@ -10,51 +10,105 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 
+// TODO: Auto-generated Javadoc
+/**
+ * Classe Categoria.
+ */
 @Entity
 public class Categoria implements Serializable {
+	
+	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = 1L;
 
+	/** The id. */
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Integer id;
+	
+	/** The nome. */
 	private String nome;
 	
+	/** The restaurantes. */
 	@ManyToMany(mappedBy="categorias")
 	private List<Restaurante> restaurantes = new ArrayList<>();
 	
+	/**
+	 * Instância uma nova categoria.
+	 */
 	public Categoria() {
 	}
 
+	/**
+	 * Instância uma nova categoria.
+	 *
+	 * @param id the id
+	 * @param nome the nome
+	 */
 	public Categoria(Integer id, String nome) {
 		super();
 		this.id = id;
 		this.nome = nome;
 	}
 
+	/**
+	 * Pega o id.
+	 *
+	 * @return the id
+	 */
 	public Integer getId() {
 		return id;
 	}
 
+	/**
+	 * Define o id.
+	 *
+	 * @param id the new id
+	 */
 	public void setId(Integer id) {
 		this.id = id;
 	}
 
+	/**
+	 * Pega o nome.
+	 *
+	 * @return the nome
+	 */
 	public String getNome() {
 		return nome;
 	}
 
+	/**
+	 * Define o nome.
+	 *
+	 * @param nome the new nome
+	 */
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
 
+	/**
+	 * Pega os restaurantes.
+	 *
+	 * @return the restaurantes
+	 */
 	public List<Restaurante> getRestaurantes() {
 		return restaurantes;
 	}
 
+	/**
+	 * Define os restaurantes.
+	 *
+	 * @param restaurantes the new restaurantes
+	 */
 	public void setRestaurantes(List<Restaurante> restaurantes) {
 		this.restaurantes = restaurantes;
 	}
 
+	/**
+	 * Hash code.
+	 *
+	 * @return the int
+	 */
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -63,6 +117,12 @@ public class Categoria implements Serializable {
 		return result;
 	}
 
+	/**
+	 * Igualdade.
+	 *
+	 * @param obj the obj
+	 * @return true, if successful
+	 */
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)

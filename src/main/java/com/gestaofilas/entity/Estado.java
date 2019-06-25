@@ -12,52 +12,106 @@ import javax.persistence.OneToMany;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
+// TODO: Auto-generated Javadoc
+/**
+ * Classe Estado.
+ */
 @Entity
 public class Estado implements Serializable {
+	
+	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = 1L;
 
+	/** The id. */
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Integer id;
+	
+	/** The nome. */
 	private String nome;
 	
+	/** The cidades. */
 	@JsonIgnore
 	@OneToMany(mappedBy="estado")
 	private List<Cidade> cidades = new ArrayList<>();
 	
+	/**
+	 * Instância um novo estado.
+	 */
 	public Estado() {
 	}
 
+	/**
+	 * Instância um novo estado.
+	 *
+	 * @param id the id
+	 * @param nome the nome
+	 */
 	public Estado(Integer id, String nome) {
 		super();
 		this.id = id;
 		this.nome = nome;
 	}
 
+	/**
+	 * Pega o id.
+	 *
+	 * @return the id
+	 */
 	public Integer getId() {
 		return id;
 	}
 
+	/**
+	 * Define o id.
+	 *
+	 * @param id the new id
+	 */
 	public void setId(Integer id) {
 		this.id = id;
 	}
 
+	/**
+	 * Pega o nome.
+	 *
+	 * @return the nome
+	 */
 	public String getNome() {
 		return nome;
 	}
 
+	/**
+	 * Define o nome.
+	 *
+	 * @param nome the new nome
+	 */
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
 
+	/**
+	 * Pega as cidades.
+	 *
+	 * @return the cidades
+	 */
 	public List<Cidade> getCidades() {
 		return cidades;
 	}
 
+	/**
+	 * Define as cidades.
+	 *
+	 * @param cidades the new cidades
+	 */
 	public void setCidades(List<Cidade> cidades) {
 		this.cidades = cidades;
 	}
 
+	/**
+	 * Hash code.
+	 *
+	 * @return the int
+	 */
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -66,6 +120,12 @@ public class Estado implements Serializable {
 		return result;
 	}
 
+	/**
+	 * Igualdade.
+	 *
+	 * @param obj the obj
+	 * @return true, if successful
+	 */
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
