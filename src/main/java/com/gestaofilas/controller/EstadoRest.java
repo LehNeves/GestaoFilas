@@ -17,16 +17,27 @@ import com.gestaofilas.entity.dto.EstadoDTO;
 import com.gestaofilas.services.CidadeService;
 import com.gestaofilas.services.EstadoService;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class EstadoRest.
+ */
 @RestController
 @RequestMapping(value="/estados")
 public class EstadoRest {
 	
+	/** The service. */
 	@Autowired
 	private EstadoService service;
 	
+	/** The cidade service. */
 	@Autowired
 	private CidadeService cidadeService;
 	
+	/**
+	 * Encontra todos os estados.
+	 *
+	 * @return the response entity
+	 */
 	@RequestMapping(method=RequestMethod.GET)
 	public ResponseEntity<List<EstadoDTO>> findAll() {
 		List<Estado> list = service.findAll();
@@ -34,6 +45,12 @@ public class EstadoRest {
 		return ResponseEntity.ok().body(listDto);
 	}
 	
+	/**
+	 * Encontra as cidades conforme o estado.
+	 *
+	 * @param estadoId the estado id
+	 * @return the response entity
+	 */
 	@RequestMapping(value="/{estadoId}/cidades", method=RequestMethod.GET)
 	public ResponseEntity<List<CidadeDTO>> findCidades(@PathVariable Integer estadoId) {
 		List<Cidade> list = cidadeService.findByEstado(estadoId);

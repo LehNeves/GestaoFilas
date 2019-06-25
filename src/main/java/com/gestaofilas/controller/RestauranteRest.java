@@ -29,13 +29,29 @@ import com.gestaofilas.entity.dto.RestauranteNewDTO;
 import com.gestaofilas.entity.dto.RestauranteUpdateDTO;
 import com.gestaofilas.services.RestauranteService;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class RestauranteRest.
+ */
 @RestController
 @RequestMapping(value="/restaurantes")
 public class RestauranteRest {
 
+	/** The service. */
 	@Autowired
 	RestauranteService service;
 	
+	/**
+	 * Retorna um objeto page de restaurantes.
+	 *
+	 * @param nome the nome
+	 * @param categorias the categorias
+	 * @param page the page
+	 * @param linesPerPage the lines per page
+	 * @param orderBy the order by
+	 * @param direction the direction
+	 * @return the response entity
+	 */
 	@GetMapping
 	public ResponseEntity<Page<RestauranteDTO>> findPage(
 		@RequestParam(value="nome", defaultValue="") String nome, 
@@ -53,6 +69,11 @@ public class RestauranteRest {
 		return ResponseEntity.ok().body(listdto);
 	}
 	
+	/**
+	 * Lista os restaurantes.
+	 *
+	 * @return the response entity
+	 */
 	@GetMapping(value="/list")
 	public ResponseEntity<List<RestauranteDTO>> listRestaurante(){
 		List<Restaurante> list = service.findAll();
@@ -61,6 +82,12 @@ public class RestauranteRest {
 	}
 	
 	
+	/**
+	 * Encontra restaurante por ID.
+	 *
+	 * @param id the id
+	 * @return the response entity
+	 */
 	@GetMapping(value="/{id}")
 	public ResponseEntity<RestauranteDTO2> findByID(@PathVariable Integer id){
 		Restaurante obj = service.findById(id);
@@ -68,6 +95,12 @@ public class RestauranteRest {
 		return ResponseEntity.ok().body(dto);
 	}
 	
+	/**
+	 * Insere um novo restaurante.
+	 *
+	 * @param obj the obj
+	 * @return the response entity
+	 */
 	@PostMapping
 	public ResponseEntity<Void> insert(@Valid @RequestBody RestauranteNewDTO obj){
 		Restaurante obj2 = service.insert(obj);
@@ -75,6 +108,13 @@ public class RestauranteRest {
 		return ResponseEntity.created(uri).build();
 	}
 	
+	/**
+	 * Atualiza um restaurante já existente.
+	 *
+	 * @param id the id
+	 * @param objDto the obj dto
+	 * @return the response entity
+	 */
 	@PutMapping(value="/{id}")
 	@PreAuthorize("hasAnyRole('RESTAURANTE', 'ADMIN')")
 	public ResponseEntity<Void> update(@Valid @PathVariable Integer id, @RequestBody RestauranteUpdateDTO objDto){
@@ -82,6 +122,12 @@ public class RestauranteRest {
 		return ResponseEntity.noContent().build();
 	}
 	
+	/**
+	 * Deleta um restaurante.
+	 *
+	 * @param id the id
+	 * @return the response entity
+	 */
 	@DeleteMapping(value="/{id}")
 	@PreAuthorize("hasAnyRole('ADMIN')")
 	public ResponseEntity<Void> delete(@PathVariable Integer id){
