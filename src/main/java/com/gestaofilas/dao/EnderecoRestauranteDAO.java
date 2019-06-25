@@ -5,6 +5,9 @@ import org.springframework.stereotype.Repository;
 
 import com.gestaofilas.entity.EnderecoRestaurante;
 
+/**
+ * A Interface EnderecoRestauranteDAO.
+ */
 @Repository
 public interface EnderecoRestauranteDAO extends JpaRepository<EnderecoRestaurante, Integer>{
 

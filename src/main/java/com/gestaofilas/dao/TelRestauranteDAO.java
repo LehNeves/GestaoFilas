@@ -5,6 +5,9 @@ import org.springframework.stereotype.Repository;
 
 import com.gestaofilas.entity.TelefoneRestaurante;
 
+/**
+ * A Interface TelRestauranteDAO.
+ */
 @Repository
 public interface TelRestauranteDAO extends JpaRepository<TelefoneRestaurante, Integer>{
 
