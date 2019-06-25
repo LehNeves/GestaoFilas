@@ -13,9 +13,20 @@ import com.gestaofilas.services.exceptions.AuthorizationException;
 import com.gestaofilas.services.exceptions.DataIntegrityException;
 import com.gestaofilas.services.exceptions.ObjectNotFoundException;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class ControllerExceptionHandler.
+ */
 @ControllerAdvice
 public class ControllerExceptionHandler {
 
+	/**
+	 * Objeto não encontrado.
+	 *
+	 * @param e the e
+	 * @param request the request
+	 * @return the response entity
+	 */
 	@ExceptionHandler(ObjectNotFoundException.class)
 	public ResponseEntity<StandardError> objectNotFound(ObjectNotFoundException e, HttpServletRequest request) {
 		
@@ -23,6 +34,13 @@ public class ControllerExceptionHandler {
 		return ResponseEntity.status(HttpStatus.NOT_FOUND).body(err);
 	}
 	
+	/**
+	 * Integridade de dados.
+	 *
+	 * @param e the e
+	 * @param request the request
+	 * @return the response entity
+	 */
 	@ExceptionHandler(DataIntegrityException.class)
 	public ResponseEntity<StandardError> dataIntegrity(DataIntegrityException e, HttpServletRequest request) {
 		
@@ -30,6 +48,13 @@ public class ControllerExceptionHandler {
 		return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(err);
 	}
 	
+	/**
+	 * Validação.
+	 *
+	 * @param e the e
+	 * @param request the request
+	 * @return the response entity
+	 */
 	@ExceptionHandler(MethodArgumentNotValidException.class)
 	public ResponseEntity<StandardError> validantion(MethodArgumentNotValidException e, HttpServletRequest request) {
 		ValidationError err = new ValidationError(System.currentTimeMillis(), HttpStatus.BAD_REQUEST.value(), "Erro de validação", request.getRequestURI());
@@ -40,6 +65,13 @@ public class ControllerExceptionHandler {
 		return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(err);
 	}
 	
+	/**
+	 * Autorização.
+	 *
+	 * @param e the e
+	 * @param request the request
+	 * @return the response entity
+	 */
 	@ExceptionHandler(AuthorizationException.class)
 	public ResponseEntity<StandardError> authorization(AuthorizationException e, HttpServletRequest request) {
 		
