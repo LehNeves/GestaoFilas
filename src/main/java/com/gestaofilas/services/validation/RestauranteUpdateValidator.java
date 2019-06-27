@@ -16,18 +16,36 @@ import com.gestaofilas.dao.RestauranteDAO;
 import com.gestaofilas.entity.Restaurante;
 import com.gestaofilas.entity.dto.RestauranteUpdateDTO;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class RestauranteUpdateValidator.
+ */
 public class RestauranteUpdateValidator implements ConstraintValidator<RestauranteUpdate, RestauranteUpdateDTO> {
 
+	/** The request. */
 	@Autowired
 	private HttpServletRequest request;
 	
+	/** The repo. */
 	@Autowired
 	RestauranteDAO repo;
 	
+	/**
+	 * Inicializars.
+	 *
+	 * @param ann the ann
+	 */
 	@Override
 	public void initialize(RestauranteUpdate ann) {
 	}
 
+	/**
+	 * Checa se é válido.
+	 *
+	 * @param objDto the obj dto
+	 * @param context the context
+	 * @return true, if is valid
+	 */
 	@Override
 	public boolean isValid(RestauranteUpdateDTO objDto, ConstraintValidatorContext context) {
 		

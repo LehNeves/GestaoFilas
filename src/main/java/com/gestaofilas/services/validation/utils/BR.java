@@ -1,13 +1,27 @@
 package com.gestaofilas.services.validation.utils;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class BR.
+ */
 // Fonte: https://gist.github.com/adrianoluis/5043397d378ae506d87366abb0ab4e30
 public class BR {
+	
+	/** The Constant weightSsn. */
 	// CPF
     private static final int[] weightSsn = {11, 10, 9, 8, 7, 6, 5, 4, 3, 2};
 
+    /** The Constant weightTin. */
     // CNPJ
     private static final int[] weightTin = {6, 5, 4, 3, 2, 9, 8, 7, 6, 5, 4, 3, 2};
 
+    /**
+     * Calcula.
+     *
+     * @param str the str
+     * @param weight the weight
+     * @return the int
+     */
     private static int calculate(final String str, final int[] weight) {
         int sum = 0;
         for (int i = str.length() - 1, digit; i >= 0; i--) {
@@ -19,10 +33,10 @@ public class BR {
     }
 
     /**
-     * Valida CPF
+     * Valida CPF.
      *
-     * @param ssn
-     * @return
+     * @param ssn the ssn
+     * @return true, if is valid CPF
      */
     public static boolean isValidCPF(final String ssn) {
         if ((ssn == null) || (ssn.length() != 11) || ssn.matches(ssn.charAt(0) + "{11}")) return false;
@@ -33,10 +47,10 @@ public class BR {
     }
 
     /**
-     * Valida CNPJ
+     * Valida CNPJ.
      *
-     * @param tin
-     * @return
+     * @param tin the tin
+     * @return true, if is valid CNPJ
      */
     public static boolean isValidCNPJ(final String tin) {
         if ((tin == null) || (tin.length() != 14) || tin.matches(tin.charAt(0) + "{14}")) return false;

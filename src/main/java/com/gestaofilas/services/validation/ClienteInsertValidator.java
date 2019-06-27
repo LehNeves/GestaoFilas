@@ -14,15 +14,32 @@ import com.gestaofilas.entity.Cliente;
 import com.gestaofilas.entity.dto.ClienteNewDTO;
 import com.gestaofilas.services.validation.utils.BR;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class ClienteInsertValidator.
+ */
 public class ClienteInsertValidator implements ConstraintValidator<ClienteInsert, ClienteNewDTO> {
 
+	/** The repo. */
 	@Autowired
 	private ClienteDAO repo;
 	
+	/**
+	 * Inicializar.
+	 *
+	 * @param ann the ann
+	 */
 	@Override
 	public void initialize(ClienteInsert ann) {
 	}
 
+	/**
+	 * Checa se é válido.
+	 *
+	 * @param objDto the obj dto
+	 * @param context the context
+	 * @return true, if is valid
+	 */
 	@Override
 	public boolean isValid(ClienteNewDTO objDto, ConstraintValidatorContext context) {
 		
