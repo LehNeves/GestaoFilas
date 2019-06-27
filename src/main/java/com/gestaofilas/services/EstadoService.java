@@ -9,12 +9,22 @@ import com.gestaofilas.dao.EstadoDAO;
 import com.gestaofilas.entity.Estado;
 
 
+// TODO: Auto-generated Javadoc
+/**
+ * Classe EstadoService.
+ */
 @Service
 public class EstadoService {
 	
+	/** The repo. */
 	@Autowired
 	private EstadoDAO repo;
 	
+	/**
+	 * Encontra tudo.
+	 *
+	 * @return the list
+	 */
 	public List<Estado> findAll() {
 		return repo.findAllByOrderByNome();
 	}

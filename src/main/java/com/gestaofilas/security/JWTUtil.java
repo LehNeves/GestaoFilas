@@ -9,15 +9,27 @@ import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 
+// TODO: Auto-generated Javadoc
+/**
+ * Classe JWTUtil.
+ */
 @Component
 public class JWTUtil {
 	
+	/** The secret. */
 	@Value("${jwt.secret}")
 	private String secret;
 
+	/** The expiration. */
 	@Value("${jwt.expiration}")
 	private Long expiration;
 	
+	/**
+	 * Gera um token.
+	 *
+	 * @param username the username
+	 * @return the string
+	 */
 	public String generateToken(String username) {
 		return Jwts.builder()
 				.setSubject(username)
@@ -26,6 +38,12 @@ public class JWTUtil {
 				.compact();
 	}
 	
+	/**
+	 * Token valido.
+	 *
+	 * @param token the token
+	 * @return true, if successful
+	 */
 	public boolean tokenValido(String token) {
 		Claims claims = getClaims(token);
 		if (claims != null) {
@@ -39,6 +57,12 @@ public class JWTUtil {
 		return false;
 	}
 
+	/**
+	 * Pega o username.
+	 *
+	 * @param token the token
+	 * @return the username
+	 */
 	public String getUsername(String token) {
 		Claims claims = getClaims(token);
 		if (claims != null) {
@@ -47,6 +71,12 @@ public class JWTUtil {
 		return null;
 	}
 	
+	/**
+	 * Recebe as reivindicações.
+	 *
+	 * @param token the token
+	 * @return the claims
+	 */
 	private Claims getClaims(String token) {
 		try {
 			return Jwts.parser().setSigningKey(secret.getBytes()).parseClaimsJws(token).getBody();

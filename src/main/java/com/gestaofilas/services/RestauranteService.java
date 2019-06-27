@@ -28,28 +28,48 @@ import com.gestaofilas.entity.dto.RestauranteUpdateDTO;
 import com.gestaofilas.entity.enums.Perfil;
 import com.gestaofilas.security.UserSS;
 
+// TODO: Auto-generated Javadoc
+/**
+ * Classe RestauranteService.
+ */
 @Service
 public class RestauranteService {
 	
+	/** The b crypt. */
 	@Autowired
 	BCryptPasswordEncoder bCrypt;
 	
+	/** The restaurante repo. */
 	@Autowired
 	RestauranteDAO restauranteRepo;
 	
+	/** The categoria repo. */
 	@Autowired
 	CategoriaDAO categoriaRepo;
 	
+	/** The telefone repo. */
 	@Autowired
 	TelRestauranteDAO telefoneRepo;
 	
+	/** The endereco repo. */
 	@Autowired
 	EnderecoRestauranteDAO enderecoRepo;
 	
+	/**
+	 * Encontra tudo.
+	 *
+	 * @return the list
+	 */
 	public List<Restaurante> findAll(){
 		return restauranteRepo.findAll();
 	}
 	
+	/**
+	 * Encontra pelo id.
+	 *
+	 * @param id the id
+	 * @return the restaurante
+	 */
 	public Restaurante findById(Integer id) {
 		
 		UserSS user = UserService.authenticated();
@@ -62,17 +82,43 @@ public class RestauranteService {
 				"Objeto não encontrado! Id: " + id + ", Tipo: " + Restaurante.class.getName()));
 	}
 	
+	/**
+	 * Busca.
+	 *
+	 * @param nome the nome
+	 * @param ids the ids
+	 * @param page the page
+	 * @param linesPerPage the lines per page
+	 * @param orderBy the order by
+	 * @param direction the direction
+	 * @return the page
+	 */
 	public Page<Restaurante> search(String nome, List<Integer> ids, Integer page, Integer linesPerPage, String orderBy, String direction) {
 		PageRequest pageRequest = PageRequest.of(page, linesPerPage, Direction.valueOf(direction), orderBy);
 		List<Categoria> categorias = categoriaRepo.findAllById(ids);
 		return restauranteRepo.findDistinctByNomeContainingAndCategoriasIn(nome, categorias, pageRequest);
 	}
 	
+	/**
+	 * Encontra um objeto do tipo page.
+	 *
+	 * @param page the page
+	 * @param linesPerPage the lines per page
+	 * @param orderBy the order by
+	 * @param direction the direction
+	 * @return the page
+	 */
 	public Page<Restaurante> findPage(Integer page, Integer linesPerPage, String orderBy, String direction){
 		PageRequest pageRequest = PageRequest.of(page, linesPerPage, Direction.valueOf(direction), orderBy);
 		return restauranteRepo.findAll(pageRequest);
 	}
 	
+	/**
+	 * Insere.
+	 *
+	 * @param objDto the obj dto
+	 * @return the restaurante
+	 */
 	public Restaurante insert(RestauranteNewDTO objDto) {
 		objDto.setSenha(bCrypt.encode(objDto.getSenha()));
 		Restaurante restaurante = new Restaurante(objDto);
@@ -102,12 +148,24 @@ public class RestauranteService {
 		return restaurante;
 	}
 	
+	/**
+	 * Atualiza.
+	 *
+	 * @param objDto the obj dto
+	 */
 	public void update(RestauranteUpdateDTO objDto) {
 		Restaurante obj = findById(objDto.getId());
 		obj = updateData(obj, objDto);
 		restauranteRepo.save(obj);
 	}
 	
+	/**
+	 * Atualiza dado.
+	 *
+	 * @param obj the obj
+	 * @param objDto the obj dto
+	 * @return the restaurante
+	 */
 	public Restaurante updateData(Restaurante obj, RestauranteUpdateDTO objDto) {
 		obj.setNome(objDto.getNome());
 		obj.setEmail(objDto.getEmail());
@@ -127,6 +185,11 @@ public class RestauranteService {
 		return obj;
 	}
 	
+	/**
+	 * Deleta.
+	 *
+	 * @param id the id
+	 */
 	public void delete(Integer id) {
 		Restaurante obj = findById(id);
 		

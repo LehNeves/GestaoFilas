@@ -26,25 +26,44 @@ import com.gestaofilas.services.exceptions.AuthorizationException;
 import com.gestaofilas.services.exceptions.DataIntegrityException;
 import com.gestaofilas.services.exceptions.ObjectNotFoundException;
 
+// TODO: Auto-generated Javadoc
+/**
+ * Classe ClienteService.
+ */
 @Service
 public class ClienteService {
 	
+	/** The b crypt. */
 	@Autowired
 	BCryptPasswordEncoder bCrypt;
 
+	/** The cliente repo. */
 	@Autowired
 	ClienteDAO clienteRepo;
 	
+	/** The telefone repo. */
 	@Autowired
 	TelClienteDAO telefoneRepo;
 	
+	/** The endereco repo. */
 	@Autowired
 	EnderecoClienteDAO enderecoRepo;
 	
+	/**
+	 * Encontra tudo.
+	 *
+	 * @return the list
+	 */
 	public List<Cliente> findAll() {
 		return clienteRepo.findAll();
 	}
 	
+	/**
+	 * Encontra por id.
+	 *
+	 * @param id the id
+	 * @return the cliente
+	 */
 	public Cliente findById(Integer id) {
 		
 		UserSS user = UserService.authenticated();
@@ -57,12 +76,27 @@ public class ClienteService {
 				"Objeto não encontrado! Id: " + id + ", Tipo: " + Cliente.class.getName()));
 	}
 	
+	/**
+	 * Encontra um objeto do tipo page.
+	 *
+	 * @param page the page
+	 * @param linesPerPage the lines per page
+	 * @param orderBy the order by
+	 * @param direction the direction
+	 * @return the page
+	 */
 	public Page<Cliente> findPage(Integer page, Integer linesPerPage, String orderBy, String direction) {
 		PageRequest pageRequest = PageRequest.of(page, linesPerPage, Direction.valueOf(direction), orderBy);
 		return clienteRepo.findAll(pageRequest);
 	}
 	
 	
+	/**
+	 * Insere.
+	 *
+	 * @param objDto the obj dto
+	 * @return the cliente
+	 */
 	public Cliente insert(ClienteNewDTO objDto) {
 		objDto.setSenha(bCrypt.encode(objDto.getSenha()));
 		Cliente obj = new Cliente(objDto);
@@ -83,12 +117,24 @@ public class ClienteService {
 		return obj;
 	}
 	
+	/**
+	 * Atualiza.
+	 *
+	 * @param objDto the obj dto
+	 */
 	public void update(ClienteUpdateDTO objDto) {
 		Cliente obj = findById(objDto.getId());
 		obj = updateData(obj, objDto);
 		clienteRepo.save(obj);
 	}
 	
+	/**
+	 * Atualiza dado.
+	 *
+	 * @param obj the obj
+	 * @param objDto the obj dto
+	 * @return the cliente
+	 */
 	public Cliente updateData(Cliente obj, ClienteUpdateDTO objDto) {
 		obj.setNome(objDto.getNome());
 		obj.setEmail(objDto.getEmail());
@@ -98,6 +144,11 @@ public class ClienteService {
 		return obj;
 	}
 	
+	/**
+	 * Deleta.
+	 *
+	 * @param id the id
+	 */
 	public void delete(Integer id) {
 		Optional<Cliente> obj = clienteRepo.findById(id);
 
@@ -108,6 +159,12 @@ public class ClienteService {
 		}
 	}
 	
+	/**
+	 * Encontra por email.
+	 *
+	 * @param email the email
+	 * @return the cliente
+	 */
 	public Cliente findByEmail(String email) {
 		
 		UserSS user = UserService.authenticated();
@@ -124,6 +181,12 @@ public class ClienteService {
 		return obj;
 	}
 
+	/**
+	 * Encontra reserva.
+	 *
+	 * @param id the id
+	 * @return the list
+	 */
 	public List<Reserva> findReserva(Integer id) {
 		
 		Cliente obj = findById(id);

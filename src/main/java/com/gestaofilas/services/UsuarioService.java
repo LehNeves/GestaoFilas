@@ -13,15 +13,27 @@ import com.gestaofilas.security.UserSS;
 import com.gestaofilas.services.exceptions.AuthorizationException;
 import com.gestaofilas.services.exceptions.ObjectNotFoundException;
 
+// TODO: Auto-generated Javadoc
+/**
+ * Classe UsuarioService.
+ */
 @Service
 public class UsuarioService {
 	
+	/** The b crypt. */
 	@Autowired
 	BCryptPasswordEncoder bCrypt;
 
+	/** The usuario repo. */
 	@Autowired
 	UsuarioDAO usuarioRepo;
 	
+	/**
+	 * Encontra pelo id.
+	 *
+	 * @param id the id
+	 * @return the usuario
+	 */
 	public Usuario findById(Integer id) {
 		
 		UserSS user = UserService.authenticated();

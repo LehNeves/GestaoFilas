@@ -20,18 +20,38 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.gestaofilas.entity.dto.CredenciaisDTO;
 
 
+// TODO: Auto-generated Javadoc
+/**
+ * Classe JWTAuthenticationFilter.
+ */
 public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilter {
 
+	/** The authentication manager. */
 	private AuthenticationManager authenticationManager;
     
+    /** The jwt util. */
     private JWTUtil jwtUtil;
 
+    /**
+     * Instancia um novo JWT authentication filter.
+     *
+     * @param authenticationManager the authentication manager
+     * @param jwtUtil the jwt util
+     */
     public JWTAuthenticationFilter(AuthenticationManager authenticationManager, JWTUtil jwtUtil) {
     	setAuthenticationFailureHandler(new JWTAuthenticationFailureHandler());
         this.authenticationManager = authenticationManager;
         this.jwtUtil = jwtUtil;
     }
 	
+	/**
+	 * Tentar autenticação.
+	 *
+	 * @param req the req
+	 * @param res the res
+	 * @return the authentication
+	 * @throws AuthenticationException the authentication exception
+	 */
 	@Override
     public Authentication attemptAuthentication(HttpServletRequest req,
                                                 HttpServletResponse res) throws AuthenticationException {
@@ -50,6 +70,16 @@ public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilte
 		}
 	}
 	
+	/**
+	 * Autenticação bem sucedida.
+	 *
+	 * @param req the req
+	 * @param res the res
+	 * @param chain the chain
+	 * @param auth the auth
+	 * @throws IOException Signals that an I/O exception has occurred.
+	 * @throws ServletException the servlet exception
+	 */
 	@Override
     protected void successfulAuthentication(HttpServletRequest req,
                                             HttpServletResponse res,
@@ -64,8 +94,20 @@ public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilte
         res.addHeader("access-control-expose-headers", "Perfil");
 	}
 	
+	/**
+	 * The Class JWTAuthenticationFailureHandler.
+	 */
 	private class JWTAuthenticationFailureHandler implements AuthenticationFailureHandler {
 		 
+        /**
+         * Na falha de autenticação.
+         *
+         * @param request the request
+         * @param response the response
+         * @param exception the exception
+         * @throws IOException Signals that an I/O exception has occurred.
+         * @throws ServletException the servlet exception
+         */
         @Override
         public void onAuthenticationFailure(HttpServletRequest request, HttpServletResponse response, AuthenticationException exception)
                 throws IOException, ServletException {
@@ -74,6 +116,11 @@ public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilte
             response.getWriter().append(json());
         }
         
+        /**
+         * Json.
+         *
+         * @return the string
+         */
         private String json() {
             long date = new Date().getTime();
             return "{\"timestamp\": " + date + ", "

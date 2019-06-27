@@ -9,12 +9,23 @@ import com.gestaofilas.dao.CidadeDAO;
 import com.gestaofilas.entity.Cidade;
 
 
+// TODO: Auto-generated Javadoc
+/**
+ * Classe CidadeService.
+ */
 @Service
 public class CidadeService {
 	
+	/** The repo. */
 	@Autowired
 	private CidadeDAO repo;
 	
+	/**
+	 * Encontra por estado.
+	 *
+	 * @param estadoId the estado id
+	 * @return the list
+	 */
 	public List<Cidade> findByEstado(Integer estadoId) {
 		return repo.findCidades(estadoId);
 	}

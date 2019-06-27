@@ -13,49 +13,76 @@ import com.gestaofilas.dao.*;
 import com.gestaofilas.entity.*;
 import com.gestaofilas.entity.enums.*;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class GestaoFilasApplication.
+ */
 @SpringBootApplication
 public class GestaoFilasApplication implements CommandLineRunner {
 	
+	/** The b crypt. */
 	@Autowired
 	BCryptPasswordEncoder bCrypt;
 	
+	/** The cat save. */
 	@Autowired
 	private CategoriaDAO catSave;
 	
+	/** The cid save. */
 	@Autowired
 	private CidadeDAO cidSave;
 	
+	/** The rest save. */
 	@Autowired
 	private RestauranteDAO restSave;
 	
+	/** The cliente save. */
 	@Autowired
 	private ClienteDAO clienteSave;
 	
+	/** The est save. */
 	@Autowired
 	private EstadoDAO estSave;
 	
+	/** The end rest save. */
 	@Autowired
 	private EnderecoRestauranteDAO endRestSave;
 	
+	/** The end cliente save. */
 	@Autowired
 	private EnderecoClienteDAO endClienteSave;
 	
+	/** The tel rest save. */
 	@Autowired
 	private TelRestauranteDAO telRestSave;
 	
+	/** The tel cliente save. */
 	@Autowired
 	private TelClienteDAO telClienteSave;
 	
+	/** The reserva save. */
 	@Autowired
 	private ReservaDAO reservaSave;
 	
+	/** The usuario save. */
 	@Autowired
 	private UsuarioDAO usuarioSave;
 
+	/**
+	 * The main method.
+	 *
+	 * @param args the arguments
+	 */
 	public static void main(String[] args) {
 		SpringApplication.run(GestaoFilasApplication.class, args);
 	}
 	
+	/**
+	 * Adicionando as categorias no back-end.
+	 *
+	 * @param args the args
+	 * @throws Exception the exception
+	 */
 	public void run(String... args) throws Exception {
 		
 		String[] categorias = {
