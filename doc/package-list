@@ -1,0 +1,15 @@
+com.br.gestaofilas
+com.gestaofilas
+com.gestaofilas.config
+com.gestaofilas.controller
+com.gestaofilas.controller.exceptions
+com.gestaofilas.controller.utils
+com.gestaofilas.dao
+com.gestaofilas.entity
+com.gestaofilas.entity.dto
+com.gestaofilas.entity.enums
+com.gestaofilas.security
+com.gestaofilas.services
+com.gestaofilas.services.exceptions
+com.gestaofilas.services.validation
+com.gestaofilas.services.validation.utils
